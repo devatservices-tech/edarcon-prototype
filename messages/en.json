@@ -1,0 +1,291 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "equipment": "Equipment",
+    "about": "About",
+    "contact": "Contact",
+    "requestQuote": "Request a Quote"
+  },
+  "topbar": {
+    "phone": "+966 55 902 1988",
+    "email": "Edarcon@edarcon.com",
+    "location": "Dammam, Kingdom of Saudi Arabia",
+    "vision": "Supporting Vision 2030"
+  },
+  "hero": {
+    "tagline": "Innovative Solutions • Engineering • Construction",
+    "headline": "Site work, done right,\non schedule.",
+    "sub": "An approved vendor to Saudi Aramco, Saudi Electricity Company, SABIC and Ma'aden — Edarcon mobilizes crews, plant and equipment for project support, civil works and facility management across the Eastern Province.",
+    "ctaQuote": "Request a Quote",
+    "ctaCapabilities": "View Capabilities",
+    "scrollHint": "Scroll to explore"
+  },
+  "stats": {
+    "vendors": "4",
+    "vendorsLabel": "Approved End-User Vendors",
+    "services": "8",
+    "servicesLabel": "Core Service Lines",
+    "support": "24/7",
+    "supportLabel": "Site Mobilization Support",
+    "years": "10",
+    "yearsLabel": "Years in the Eastern Province"
+  },
+  "vendors": {
+    "title": "Approved Vendor To",
+    "aramco": "Saudi Aramco",
+    "sec": "Saudi Electricity Company",
+    "sabic": "SABIC",
+    "maaden": "Ma'aden"
+  },
+  "services": {
+    "title": "Our Services",
+    "eyebrow": "What We Do",
+    "subtitle": "Eight core service lines delivered across the Eastern Province",
+    "viewAll": "View All Services",
+    "items": {
+      "projectSupport": {
+        "title": "Project Support Services",
+        "desc": "Site mobilization, temporary facilities, logistics, and standby crews for seamless project execution."
+      },
+      "sitePrep": {
+        "title": "Site Preparation",
+        "desc": "Clearing, grading, access roads, and laydown yards to ready your site for construction."
+      },
+      "dewatering": {
+        "title": "De-Watering",
+        "desc": "Well-point and pumped systems engineered to keep excavations dry and safe."
+      },
+      "civilWorks": {
+        "title": "Civil Works",
+        "desc": "Foundations, concrete, underground utilities, and structural civil packages."
+      },
+      "scaffolding": {
+        "title": "Scaffolding",
+        "desc": "Tube-and-fitting and system scaffold erected by certified riggers following TG20 practice."
+      },
+      "equipmentRental": {
+        "title": "Equipment Rental",
+        "desc": "Cranes, excavators, generators, loaders, and site vehicles — with or without operators."
+      },
+      "manpower": {
+        "title": "Manpower Support",
+        "desc": "Welders, riggers, electricians, and helpers — supplied and supervised."
+      },
+      "facilityMgmt": {
+        "title": "Facility Management",
+        "desc": "O&M support for Aramco, SEC, SABIC, and Ma'aden facilities."
+      }
+    },
+    "bullets": {
+      "projectSupport": [
+        "Site mobilization planning & execution",
+        "Temporary facilities & laydown areas",
+        "Logistics coordination & supply chain",
+        "Standby crews for reactive support",
+        "Method statements & risk assessments"
+      ],
+      "sitePrep": [
+        "Land clearing & vegetation removal",
+        "Bulk earthworks & grading",
+        "Access road construction",
+        "Laydown yard preparation",
+        "Topsoil stripping & stockpiling"
+      ],
+      "dewatering": [
+        "Well-point dewatering systems",
+        "Submersible & centrifugal pump systems",
+        "Sump pumping & drainage",
+        "Groundwater monitoring",
+        "Discharge management & compliance"
+      ],
+      "civilWorks": [
+        "Reinforced concrete foundations",
+        "Underground utility installation",
+        "Structural civil packages",
+        "Drainage & culvert works",
+        "Concrete repair & remediation"
+      ],
+      "scaffolding": [
+        "Tube-and-fitting scaffold systems",
+        "System scaffold (Layher / Haki)",
+        "TG20 compliant design & erection",
+        "Certified scaffold inspectors on site",
+        "Scaffold tagging & handover documentation"
+      ],
+      "equipmentRental": [
+        "Mobile cranes (25T – 500T)",
+        "Excavators & backhoe loaders",
+        "Diesel generators (20kVA – 1000kVA)",
+        "Wheel loaders & telehandlers",
+        "Site vehicles & personnel transport"
+      ],
+      "manpower": [
+        "Coded welders (SMAW, GTAW, FCAW)",
+        "Certified riggers & banksmen",
+        "Electricians & instrumentation technicians",
+        "General helpers & labourers",
+        "Supervision & HSE officers"
+      ],
+      "facilityMgmt": [
+        "Planned preventive maintenance (PPM)",
+        "Corrective & reactive maintenance",
+        "Housekeeping & janitorial services",
+        "Pest control & waste management",
+        "Facility condition surveys & reporting"
+      ]
+    }
+  },
+  "about": {
+    "title": "About Edarcon",
+    "eyebrow": "Who We Are",
+    "subtitle": "Dammam-based. HSE-led. Vision 2030 aligned.",
+    "heroLocation": "Dammam, Eastern Province",
+    "heroSubtitle": "Approved Industrial & Civil Contractor",
+    "valuesEyebrow": "Our Values",
+    "valuesTitle": "What Sets Us Apart",
+    "body": "Edarcon Contracting Company is a Dammam-based industrial and civil contractor with a proven track record across the Eastern Province. We operate with an HSE-led mobilization culture, a directly employed workforce, and the ability to mobilize rapidly — staged and ready in the Eastern Province. Our operations are fully aligned with Vision 2030 through Saudization and local content commitments.",
+    "learnMore": "Learn More About Us",
+    "features": {
+      "hse": {
+        "title": "HSE-Led Culture",
+        "desc": "Safety is embedded in every mobilization plan, method statement and toolbox talk."
+      },
+      "workforce": {
+        "title": "Own Workforce",
+        "desc": "Directly employed trades — welders, riggers, electricians — no sub-contracting of labour."
+      },
+      "rapid": {
+        "title": "Rapid Mobilization",
+        "desc": "Crews and plant staged in the Eastern Province, ready to deploy within days of award."
+      },
+      "vision": {
+        "title": "Vision 2030 Aligned",
+        "desc": "Committed to Saudization targets and local content across all contracts."
+      }
+    },
+    "process": {
+      "title": "How We Work",
+      "eyebrow": "Our Process",
+      "step1": "Scope & Survey",
+      "step1Desc": "We review drawings, visit site and agree a detailed scope with the client.",
+      "step2": "Mobilize",
+      "step2Desc": "Crews, plant and temporary facilities are deployed within days of confirmed award.",
+      "step3": "Execute & Report",
+      "step3Desc": "Work is executed to method statements with daily progress reporting to the client.",
+      "step4": "Demobilize & Handover",
+      "step4Desc": "Site is cleared, inspected and formally handed over with full documentation."
+    },
+    "sectors": {
+      "title": "Sectors We Serve",
+      "eyebrow": "Industries",
+      "oil": "Oil & Gas",
+      "petro": "Petrochemicals",
+      "power": "Power & Utilities",
+      "mining": "Mining & Minerals",
+      "infra": "Infrastructure",
+      "chem": "Chemicals"
+    },
+    "approvedVendors": ["Saudi Aramco", "Saudi Electricity Company", "SABIC", "Ma'aden"]
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "eyebrow": "FAQ",
+    "subtitle": "Everything you need to know before engaging Edarcon.",
+    "items": [
+      {
+        "q": "Which clients have approved Edarcon as a vendor?",
+        "a": "Edarcon is an approved vendor to Saudi Aramco, Saudi Electricity Company (SEC), SABIC, and Ma'aden."
+      },
+      {
+        "q": "Do you supply equipment with operators?",
+        "a": "Yes. All equipment can be supplied with or without certified operators depending on your project requirements."
+      },
+      {
+        "q": "Can we engage Edarcon for a single service rather than a full package?",
+        "a": "Absolutely. We offer individual service lines as well as fully integrated project support packages."
+      },
+      {
+        "q": "How quickly can Edarcon mobilize to site?",
+        "a": "We can mobilize within days of a confirmed award. Our crews and plant are staged in the Eastern Province for rapid deployment."
+      },
+      {
+        "q": "Where is Edarcon based?",
+        "a": "Our head office is located at Building No 4315, Office No 5-2, King Saud Street, District Al Jalawiyah, Dammam-32246, KSA."
+      }
+    ]
+  },
+  "cta": {
+    "eyebrow": "Ready to Start?",
+    "title": "Let's get your project moving.",
+    "sub": "Tell us your scope and we'll respond within one business day with a mobilization plan.",
+    "quote": "Request a Quote",
+    "call": "Call Us Now"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "eyebrow": "Contact Us",
+    "subtitle": "Request a quote or ask us anything",
+    "address": "Building No 4315, Office No 5-2, King Saud Street, District Al Jalawiyah, Dammam-32246, KSA",
+    "addressCode": "EDJC4315",
+    "contactInfo": "Contact Information",
+    "addressLabel": "Address",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "workingHoursLabel": "Working Hours",
+    "workingHours": "Sun - Thu: 7:30 AM - 4:30 PM\nFri - Sat: Closed",
+    "serviceArea": "We serve clients across the Eastern Province including Dammam, Jubail, Khobar, Al Ahsa, and Qatif. Whether your project is in oil & gas, petrochemicals, power, mining, or infrastructure, our team is ready to provide technical and field support.",
+    "whatsappLabel": "Prefer WhatsApp?",
+    "whatsappCTA": "Message us on WhatsApp",
+    "customQuoteTitle": "Request a Custom Quote for Your Project",
+    "customQuoteDesc": "Our engineering team is available to provide feasibility studies, BOQs, and detailed quotations within 48 hours.",
+    "freeSiteSurvey": "Free Site Survey",
+    "freeSiteSurveyDesc": "We assess your project site at no cost",
+    "instantConsultation": "Instant Technical Consultation",
+    "instantConsultationDesc": "Speak directly with our engineers",
+    "quote48Hours": "Quote Within 48 Hours",
+    "quote48HoursDesc": "Detailed, fast turnaround quotes",
+    "form": {
+      "name": "Full Name",
+      "company": "Company",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "service": "Service Required",
+      "siteLocation": "Site Location",
+      "message": "Message",
+      "submit": "Send Request",
+      "success": "Thank you! We'll be in touch shortly.",
+      "selectService": "Select a service"
+    }
+  },
+  "footer": {
+    "blurb": "Industrial and civil contractor serving the Eastern Province of Saudi Arabia. Approved vendor to Saudi Aramco, SEC, SABIC, and Ma'aden.",
+    "address": "Building No 4315, Office No 5-2, King Saud Street, District Al Jalawiyah, Dammam-32246, KSA",
+    "servicesTitle": "Services",
+    "companyTitle": "Company",
+    "contactTitle": "Contact",
+    "copyright": "© {year} Edarcon Contracting Company. All rights reserved.",
+    "links": {
+      "about": "About Us",
+      "contact": "Contact",
+      "services": "Services",
+      "equipment": "Equipment"
+    }
+  },
+  "equipment": {
+    "title": "Equipment Fleet",
+    "eyebrow": "Our Fleet",
+    "subtitle": "Modern plant and equipment staged in the Eastern Province",
+    "categories": {
+      "lifting": "Lifting & Cranes",
+      "earthmoving": "Earthmoving",
+      "power": "Power & Utilities",
+      "transport": "Transport & Vehicles"
+    }
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "backToTop": "Back to Top"
+  }
+}
