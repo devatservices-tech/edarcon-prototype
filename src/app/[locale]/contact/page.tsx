@@ -18,10 +18,13 @@ export async function generateMetadata({
 
 export default async function ContactPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { locale } = await params;
+  const { message: prefillMessage } = await searchParams;
   const t = await getTranslations({ locale, namespace: "contact" });
   const formLabels = {
     name: t("form.name"),
@@ -140,7 +143,7 @@ export default async function ContactPage({
                   align="start"
                   className="mb-8"
                 />
-                <ContactForm labels={formLabels} locale={locale} />
+                <ContactForm labels={formLabels} locale={locale} prefillMessage={prefillMessage as string | undefined} />
               </div>
             </RevealOnScroll>
           </div>

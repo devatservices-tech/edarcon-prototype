@@ -3,6 +3,7 @@
     "home": "Home",
     "services": "Services",
     "equipment": "Equipment",
+    "catalog": "Catalog",
     "about": "About",
     "contact": "Contact",
     "requestQuote": "Request a Quote"
@@ -269,13 +270,19 @@
       "about": "About Us",
       "contact": "Contact",
       "services": "Services",
-      "equipment": "Equipment"
+      "equipment": "Equipment",
+      "catalog": "Catalog"
     }
   },
   "equipment": {
     "title": "Equipment Fleet",
     "eyebrow": "Our Fleet",
     "subtitle": "Modern plant and equipment staged in the Eastern Province",
+    "viewDetails": "View details",
+    "backToEquipment": "Back to Equipment",
+    "keyFeatures": "Key features",
+    "specifications": "Specifications",
+    "requestQuote": "Request a Quote",
     "categories": {
       "lifting": "Lifting & Cranes",
       "earthmoving": "Earthmoving",
@@ -287,5 +294,209 @@
     "learnMore": "Learn More",
     "viewAll": "View All",
     "backToTop": "Back to Top"
+  },
+  "catalog": {
+    "title": "Equipment Catalog",
+    "eyebrow": "Plant & Equipment",
+    "intro": "Browse our fleet of rental and supply equipment staged in the Eastern Province. Select a machine and add it to your enquiry for a tailored quote.",
+    "viewAll": "View Full Catalog",
+    "placeholderNotice": "Placeholder data — seed content to be replaced with the real Edarcon fleet.",
+    "search": "Search equipment…",
+    "searchLabel": "Search equipment by name, description or category",
+    "filters": "Filters",
+    "clearFilters": "Clear filters",
+    "allCategories": "All Categories",
+    "availability": "Availability",
+    "rent": "For Rent",
+    "supply": "For Supply",
+    "both": "Rent or Supply",
+    "withOperator": "With operator",
+    "sort": "Sort by",
+    "sortFeatured": "Featured",
+    "sortName": "A–Z",
+    "viewDetails": "View details",
+    "addToEnquiry": "Add to Enquiry",
+    "addedToEnquiry": "Added to enquiry",
+    "emptyTitle": "No equipment found",
+    "emptyDesc": "Try adjusting your filters or search.",
+    "clearAll": "Clear all filters",
+    "breadcrumbs": {
+      "home": "Home",
+      "catalog": "Catalog",
+      "detail": "Equipment"
+    },
+    "related": "Related Equipment",
+    "availabilityLabel": "Availability",
+    "operatorLabel": "Operator",
+    "galleryLabel": "Image gallery",
+    "lightbox": {
+      "open": "Open lightbox",
+      "close": "Close lightbox",
+      "prev": "Previous image",
+      "next": "Next image"
+    },
+    "features": "Features",
+    "specifications": "Specifications",
+    "applications": "Typical applications",
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "phoneNumber": "+966 55 902 1988",
+    "whatsappLabel": "Message us on WhatsApp",
+    "categories": {
+      "cranes-lifting": "Cranes & Lifting",
+      "earthmoving": "Earthmoving",
+      "power-generators": "Power & Generators",
+      "dewatering": "De-Watering",
+      "scaffolding-access": "Scaffolding & Access",
+      "site-vehicles": "Site Vehicles",
+      "fabrication-manufacturing": "Fabrication & Manufacturing"
+    },
+    "products": {
+      "mobile-crane-25t": {
+        "name": "Mobile Crane 25T",
+        "shortDescription": "Road-legal all-terrain crane for general lifting work.",
+        "description": "A road-legal all-terrain mobile crane with 25 tonne capacity, suited to lifting and positioning across plant sites and confined yards. Supplied with a certified rigger-operator, full rigging gear and a current load chart.",
+        "features": ["Certified operator and banksman supplied", "Full rigging set: slings, shackles, spreader bar", "Current third-party load test certificate", "Suited to confined and uneven terrain"],
+        "applications": ["Plant lifts and machinery positioning", "Structural steel placement", "Confined-yard material handling"],
+        "specs": { "maxCapacity": "Max capacity", "boomLength": "Boom length", "drive": "Drive", "operator": "Operator" }
+      },
+      "crawler-crane-100t": {
+        "name": "Crawler Crane 100T",
+        "shortDescription": "Tracked lattice-boom crane for heavy lifts.",
+        "description": "High-capacity crawler crane with lattice boom for heavy lifts on industrial and infrastructure sites. Tracks suit soft and uneven ground; supplied with certified crew and full load documentation.",
+        "features": ["Certified operator supplied", "100 tonne lifting capacity", "Lattice boom configuration", "Tracked undercarriage for soft ground"],
+        "applications": ["Heavy structural lifts", "Industrial plant erection", "Infrastructure projects"],
+        "specs": { "maxCapacity": "Max capacity", "boomType": "Boom type", "drive": "Drive", "groundPressure": "Ground pressure" }
+      },
+      "forklift-5t": {
+        "name": "Forklift 5T",
+        "shortDescription": "5 tonne diesel rough-terrain forklift.",
+        "description": "5 tonne diesel forklift rated for rough terrain, ideal for yard and construction material handling. Heavy-duty tyres with high ground clearance.",
+        "features": ["5 tonne capacity", "Diesel engine", "Rough-terrain tyres", "High ground clearance"],
+        "applications": ["Yard material handling", "Loading and unloading", "Construction site logistics"],
+        "specs": { "capacity": "Capacity", "fuel": "Fuel", "terrain": "Terrain", "tyres": "Tyres" }
+      },
+      "excavator-20t": {
+        "name": "Excavator 20T",
+        "shortDescription": "20 tonne hydraulic excavator with long reach.",
+        "description": "20 tonne tracked excavator with long-reach arm for excavation, trenching and demolition. Fully serviced; certified operator available.",
+        "features": ["20 tonne operating weight", "Long-reach arm", "Hydraulic attachments ready", "Certified operator available"],
+        "applications": ["Bulk excavation and trenching", "Demolition work", "Site preparation"],
+        "specs": { "operatingWeight": "Operating weight", "armType": "Arm type", "drive": "Drive", "attachments": "Attachments" }
+      },
+      "wheel-loader-3m3": {
+        "name": "Wheel Loader 3m³",
+        "shortDescription": "3 m³ bucket wheel loader for loading and stockpiling.",
+        "description": "3 m³ wheel loader with 4WD for loading, stockpiling and material handling on site. Productive and manoeuvrable for civil and plant work.",
+        "features": ["3 m³ bucket", "4WD drive", "Material handling", "Certified operator available"],
+        "applications": ["Loading and stockpiling", "Material handling", "Civil and plant work"],
+        "specs": { "bucketCapacity": "Bucket capacity", "drive": "Drive", "type": "Type" }
+      },
+      "backhoe-loader": {
+        "name": "Backhoe Loader",
+        "shortDescription": "4WD backhoe loader with extendable dipper.",
+        "description": "Versatile backhoe loader with front loader and rear backhoe, 4WD and extendable dipper. Suitable for trenching, loading and general site work.",
+        "features": ["4WD backhoe loader", "Extendable dipper", "Front loader and backhoe", "Certified operator available"],
+        "applications": ["Trenching and utility work", "Loading and backfilling", "General site work"],
+        "specs": { "drive": "Drive", "dipper": "Dipper", "functions": "Functions" }
+      },
+      "diesel-generator-100kva": {
+        "name": "Diesel Generator 100 kVA",
+        "shortDescription": "100 kVA soundproofed diesel generator for site power.",
+        "description": "100 kVA diesel generator in a soundproofed canopy for site power and standby applications. Fuel-efficient and ready for immediate deployment.",
+        "features": ["100 kVA prime power", "Diesel engine", "Soundproofed canopy", "Auto-start capable"],
+        "applications": ["Site power supply", "Standby power", "Temporary power for events"],
+        "specs": { "powerRating": "Power rating", "fuel": "Fuel", "canopy": "Canopy", "start": "Start" }
+      },
+      "light-tower-led": {
+        "name": "LED Light Tower",
+        "shortDescription": "Mobile LED light tower for night works.",
+        "description": "Mobile LED light tower with mast-mounted fittings for night works and secure site illumination. Low fuel consumption and quiet operation.",
+        "features": ["LED mast lighting", "Mobile trailer chassis", "Low fuel consumption", "Dusk-to-dawn sensor"],
+        "applications": ["Night works illumination", "Site security lighting", "Roadwork and event lighting"],
+        "specs": { "lightingType": "Lighting type", "chassis": "Chassis", "operation": "Operation", "runtime": "Runtime" }
+      },
+      "air-compressor-185cfm": {
+        "name": "Air Compressor 185 CFM",
+        "shortDescription": "185 CFM towable diesel air compressor.",
+        "description": "185 CFM towable diesel air compressor for pneumatic tools, blasting and site air supply. Road-towable and ready for deployment.",
+        "features": ["185 CFM free air delivery", "Diesel driven", "Towable chassis", "Pneumatic tool ready"],
+        "applications": ["Pneumatic tool operation", "Sandblasting and surface preparation", "Site air supply"],
+        "specs": { "freeAirDelivery": "Free air delivery", "drive": "Drive", "chassis": "Chassis", "pressure": "Pressure" }
+      },
+      "well-point-system": {
+        "name": "Well-Point Dewatering System",
+        "shortDescription": "Well-point system to keep excavations dry.",
+        "description": "Well-point dewatering system engineered to lower groundwater and keep excavations dry and safe. Includes headers, pumps and discharge management.",
+        "features": ["Groundwater lowering", "Header and riser pipework", "Pump package included", "Discharge management"],
+        "applications": ["Excavation dewatering", "Foundation works", "Trenching in high water table"],
+        "specs": { "systemType": "System type", "capacity": "Capacity", "pumps": "Pumps", "discharge": "Discharge" }
+      },
+      "submersible-trash-pump": {
+        "name": "Submersible Trash Pump",
+        "shortDescription": "Submersible pump for trash and site water.",
+        "description": "Heavy-duty submersible trash pump for removing site water, slurry and dewatering flows. Solids-handling impeller for dirty water applications.",
+        "features": ["Solids-handling impeller", "Submersible construction", "Portable and rugged", "Rapid deployment"],
+        "applications": ["Site water removal", "Slurry and dirty water", "Basement and pit dewatering"],
+        "specs": { "type": "Type", "application": "Application", "impeller": "Impeller", "mounting": "Mounting" }
+      },
+      "tube-fitting-scaffold": {
+        "name": "Tube-and-Fitting Scaffold",
+        "shortDescription": "Traditional tube-and-fitting scaffold system.",
+        "description": "Tube-and-fitting scaffold erected by certified riggers following TG20 practice. Flexible system for façades, structures and complex geometries.",
+        "features": ["TG20 compliant design", "Certified scaffold erectors", "Scaffold tagging and inspection", "Flexible geometry"],
+        "applications": ["Facade access", "Structural work", "Complex geometry access"],
+        "specs": { "system": "System", "compliance": "Compliance", "erectors": "Erectors", "inspection": "Inspection" }
+      },
+      "scissor-lift-12m": {
+        "name": "Scissor Lift 12 m",
+        "shortDescription": "12 m electric scissor lift for work at height.",
+        "description": "12 m electric scissor lift for safe work at height indoors and on finished floors. Zero-emission, non-marking tyres and compact platform.",
+        "features": ["12 m working height", "Electric drive", "Non-marking tyres", "Compact platform"],
+        "applications": ["Fit-out and finishing", "MEP installation", "Indoor work at height"],
+        "specs": { "workingHeight": "Working height", "drive": "Drive", "tyres": "Tyres", "emission": "Emission" }
+      },
+      "pickup-4x4": {
+        "name": "Pickup 4×4",
+        "shortDescription": "4×4 pickup for site supervision and crew transport.",
+        "description": "4×4 pickup (Toyota Hilux or equivalent) for site supervision, crew transport and off-road access on project sites. Driver included.",
+        "features": ["4×4 drive", "Off-road capable", "Driver included", "Site supervision ready"],
+        "applications": ["Site supervision", "Crew transport", "Off-road site access"],
+        "specs": { "drive": "Drive", "model": "Model", "type": "Type", "driver": "Driver" }
+      },
+      "personnel-bus-30": {
+        "name": "Personnel Bus 30-Seat",
+        "shortDescription": "30-seat air-conditioned crew bus.",
+        "description": "30-seat personnel bus with air conditioning and safety belts for workforce transport to and from site. Comfortable and safety-compliant.",
+        "features": ["30 passenger seats", "Air conditioning", "Safety belts", "Driver included"],
+        "applications": ["Workforce transport", "Crew rotation", "Site-to-site transfer"],
+        "specs": { "capacity": "Capacity", "cooling": "Cooling", "type": "Type", "driver": "Driver" }
+      },
+      "site-cabin-portacabin": {
+        "name": "Site Cabin (Portacabin)",
+        "shortDescription": "Portable site office and accommodation cabin.",
+        "description": "Portable site cabin/portacabin for site offices, welfare and worker accommodation. Insulated, wired and ready for rapid deployment.",
+        "features": ["Insulated panels", "Electrical wiring included", "Rapid deployment", "Welfare-ready"],
+        "applications": ["Site offices", "Welfare facilities", "Worker accommodation"],
+        "specs": { "type": "Type", "use": "Use", "insulation": "Insulation", "deployment": "Deployment" }
+      }
+    }
+  },
+  "enquiry": {
+    "title": "Equipment Enquiry",
+    "button": "Enquiry ({n})",
+    "empty": "Your enquiry is empty",
+    "emptyDesc": "Add equipment from the catalog to request a combined quote.",
+    "add": "Add to Enquiry",
+    "added": "Added to enquiry",
+    "remove": "Remove",
+    "quantity": "Quantity",
+    "requestQuote": "Request a Quote",
+    "requestQuoteOnWhatsApp": "Request Quote on WhatsApp",
+    "contactPrefill": "Continue to Contact Page",
+    "whatsappIntro": "Equipment Enquiry — Edarcon",
+    "itemsLabel": "Items",
+    "totalItems": "{n} item(s)",
+    "continueShopping": "Continue browsing"
   }
 }

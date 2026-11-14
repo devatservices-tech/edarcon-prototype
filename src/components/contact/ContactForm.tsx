@@ -56,13 +56,16 @@ function Field({ id, label, error, children }: { id: string; label: string; erro
   );
 }
 
-export default function ContactForm({ labels, locale }: { labels: Labels; locale: string }) {
+export default function ContactForm({ labels, locale, prefillMessage }: { labels: Labels; locale: string; prefillMessage?: string }) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const isAr = locale === "ar";
   const serviceOptions = isAr ? SERVICE_OPTIONS_AR : SERVICE_OPTIONS_EN;
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      message: prefillMessage || "",
+    },
   });
 
   async function onSubmit(data: FormData) {

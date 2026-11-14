@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+  <defs>
+    <linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#0D1B2A"/><stop offset="100%" stop-color="#1A2E45"/></linearGradient>
+  </defs>
+  <rect width="900" height="600" fill="url(#g)"/>
+  <path d="M00 L0H0 V600 M400 L40H40 V600 M800 L80H80 V600 M1200 L120H120 V600 M1600 L160H160 V600 M2000 L200H200 V600 M2400 L240H240 V600 M2800 L280H280 V600 M3200 L320H320 V600 M3600 L360H360 V600 M4000 L400H400 V600 M4400 L440H440 V600 M4800 L480H480 V600 M5200 L520H520 V600 M5600 L560H560 V600 M6000 L600H600 V600 M6400 L640H640 V600 M6800 L680H680 V600 M7200 L720H720 V600 M7600 L760H760 V600 M8000 L800H800 V600 M8400 L840H840 V600 M8800 L880H880 V600 M00 H900 V0 M040 H900 V40 M080 H900 V80 M0120 H900 V120 M0160 H900 V160 M0200 H900 V200 M0240 H900 V240 M0280 H900 V280 M0320 H900 V320 M0360 H900 V360 M0400 H900 V400 M0440 H900 V440 M0480 H900 V480 M0520 H900 V520 M0560 H900 V560 M0600 H900 V600 " stroke="#1F5A99" stroke-width="0.5" opacity="0.25"/>
+  <g stroke="#F5A031" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    M370 330 L520 330 L520 250 L550 250 L560 220 L560 210 L370 210 Z M380 340 L380 370 M510 340 L510 370
+  </g>
+  <rect x="60" y="470" width="780" height="70" rx="10" fill="#1F5A99" opacity="0.15" stroke="#1F5A99" stroke-width="1" opacity="0.4"/>
+  <text x="450" y="520" font-family="Inter, sans-serif" font-size="22" font-weight="700" fill="#F5A031" text-anchor="middle">Pickup 4×4</text>
+  <text x="450" y="552" font-family="Inter, sans-serif" font-size="15" fill="#9FB3C8" text-anchor="middle">Site Vehicles</text>
+  <text x="450" y="40" font-family="Inter, sans-serif" font-size="13" fill="#9FB3C8" text-anchor="middle" opacity="0.6">EDARCON — PLACEHOLDER IMAGE</text>
+</svg>

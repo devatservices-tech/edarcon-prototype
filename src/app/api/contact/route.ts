@@ -10,9 +10,30 @@ const schema = z.object({
   service:      z.string().min(1),
   siteLocation: z.string().min(1),
   message:      z.string().min(10),
+  items:        z.array(z.object({
+    productId: z.string(),
+    quantity:  z.number().min(1),
+  })).optional(),
 });
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+function itemsHtml(items: { productId: string; quantity: number }[] | undefined) {
+  if (!items || items.length === 0) return "";
+  const rows = items.map((i) => `
+    <tr>
+      <td style="border:1px solid #ddd;padding:6px">${i.productId}</td>
+      <td style="border:1px solid #ddd;padding:6px;text-align:center">${i.quantity}</td>
+    </tr>
+  `).join("");
+  return `
+    <h3>Equipment Enquiry Items</h3>
+    <table cellpadding="6" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
+      <tr><th style="border:1px solid #ddd;padding:6px">Product</th><th style="border:1px solid #ddd;padding:6px">Qty</th></tr>
+      ${rows}
+    </table>
+  `;
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -23,7 +44,7 @@ export async function POST(req: NextRequest) {
       from:    "Edarcon Website <noreply@edarcon.com>",
       to:      ["Edarcon@edarcon.com"],
       replyTo: data.email,
-      subject: `New Quote Request — ${data.service} — ${data.company}`,
+      subject: `New Quote Request — ${data.service} — ${data.company}${data.items ? " (Equipment Enquiry)" : ""}`,
       html: `
         <h2>New Quote Request</h2>
         <table cellpadding="6" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
@@ -34,6 +55,7 @@ export async function POST(req: NextRequest) {
           <tr><td><strong>Service</strong></td><td>${data.service}</td></tr>
           <tr><td><strong>Site Location</strong></td><td>${data.siteLocation}</td></tr>
         </table>
+        ${itemsHtml(data.items)}
         <h3>Message</h3>
         <p style="font-family:sans-serif;font-size:14px">${data.message.replace(/\n/g, "<br>")}</p>
       `,

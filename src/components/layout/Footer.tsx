@@ -20,6 +20,7 @@ const COMPANY_LINKS = [
   { key: "about",     href: "/about"     },
   { key: "services",  href: "/services"  },
   { key: "equipment", href: "/equipment" },
+  { key: "catalog",   href: "/catalog"   },
   { key: "contact",   href: "/contact"   },
 ] as const;
 

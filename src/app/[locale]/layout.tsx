@@ -6,6 +6,9 @@ import { routing } from "@/i18n/routing";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { EnquiryProvider } from "@/components/catalog/EnquiryContext";
+import { EnquiryButton } from "@/components/catalog/EnquiryButton";
+import { PRODUCTS } from "@/data/catalog";
 
 export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -53,6 +56,15 @@ export default async function LocaleLayout({
       ? (await import("../../../messages/ar.json")).default
       : (await import("../../../messages/en.json")).default;
 
+  const isRtl = locale === "ar";
+  const t = messages as unknown as { [key: string]: string };
+
+  const enrichedProducts = PRODUCTS.map((p) => ({
+    ...p,
+    name: t[`Catalog.products.${p.id}.name`] || p.id,
+    shortDescription: t[`Catalog.products.${p.id}.shortDescription`] || "",
+  }));
+
   return (
     <ThemeProvider
       attribute="class"
@@ -61,10 +73,13 @@ export default async function LocaleLayout({
       disableTransitionOnChange
     >
       <NextIntlClientProvider messages={messages}>
-        <Navbar locale={locale} />
-        <main>{children}</main>
-        <Footer locale={locale} />
-        <WhatsAppButton />
+        <EnquiryProvider>
+          <Navbar locale={locale} />
+          <main>{children}</main>
+          <Footer locale={locale} />
+          <WhatsAppButton />
+          <EnquiryButton products={enrichedProducts} isRtl={isRtl} />
+        </EnquiryProvider>
       </NextIntlClientProvider>
     </ThemeProvider>
   );
