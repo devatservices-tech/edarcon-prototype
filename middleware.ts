@@ -29,12 +29,16 @@ function isValidAdminSession(value: string | undefined): boolean {
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // API routes live outside the next-intl locale scope (no /:locale prefix).
+  if (pathname.startsWith("/api")) {
+    return NextResponse.next();
+  }
+
   // Admin lives outside next-intl: English only, LTR, own root layout.
   if (pathname.startsWith("/admin")) {
     const isPublic = ADMIN_PUBLIC_PATHS.includes(pathname);
-    const isApi = pathname.startsWith("/api/admin");
 
-    if (!isPublic && !isApi && !isValidAdminSession(request.cookies.get(ADMIN_COOKIE)?.value)) {
+    if (!isPublic && !isValidAdminSession(request.cookies.get(ADMIN_COOKIE)?.value)) {
       return NextResponse.redirect(new URL("/admin/login", request.url));
     }
     return NextResponse.next();
