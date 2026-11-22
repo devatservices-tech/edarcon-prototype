@@ -50,7 +50,7 @@ export default function SectionHeading({
       {/* Animated underline bar */}
       <div
         className={cn(
-          "h-1 w-16 rounded-full bg-[var(--brand-orange)]",
+          "h-1 w-16 rounded-full bg-[var(--brand-orange)] self-start",
           align === "center" && "self-center",
           align === "end"    && "self-end"
         )}

@@ -4,9 +4,10 @@ import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Sun, Moon, Globe, Menu, X, ChevronRight } from "lucide-react";
+import { Sun, Moon, Globe, Menu, X, ChevronRight, ExternalLink } from "lucide-react";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
+import { useAdminData, useTranslatable } from "@/lib/admin/data-provider";
 
 const NAV_LINKS = [
   { key: "home",      href: "/"          },
@@ -14,6 +15,8 @@ const NAV_LINKS = [
   { key: "equipment", href: "/equipment" },
   { key: "catalog",   href: "/catalog"   },
   { key: "about",     href: "/about"     },
+  { key: "qualityHse",href: "/quality-hse" },
+  { key: "projects",  href: "/projects-experience" },
   { key: "contact",   href: "/contact"   },
 ] as const;
 
@@ -21,7 +24,8 @@ export default function Navbar({ locale }: { locale: string }) {
   const t  = useTranslations("nav");
   const tb = useTranslations("topbar");
   const { resolvedTheme, setTheme } = useTheme();
-  const pathname    = usePathname(); // next-intl: already locale-stripped e.g. "/" or "/about"
+  const { contactDetails, siteSettings, loading } = useAdminData();
+  const pathname    = usePathname();
   const router      = useRouter();
   const [scrolled,  setScrolled]  = useState(false);
   const [mounted,   setMounted]   = useState(false);
@@ -37,13 +41,11 @@ export default function Navbar({ locale }: { locale: string }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Sync html lang/dir on client-side locale changes
   useEffect(() => {
     document.documentElement.lang = locale;
     document.documentElement.dir  = isRtl ? "rtl" : "ltr";
   }, [locale, isRtl]);
 
-  // Close drawer on route change
   useEffect(() => { setDrawerOpen(false); }, [pathname]);
 
   function switchLocale() {
@@ -51,10 +53,14 @@ export default function Navbar({ locale }: { locale: string }) {
     router.replace(cleanPath, { locale: otherLocale });
   }
 
-  // pathname from next-intl usePathname is already locale-stripped
   function isActive(href: string) {
     return href === "/" ? pathname === "/" : pathname.startsWith(href);
   }
+
+  const siteName = useTranslatable(siteSettings?.siteName, locale);
+  const primaryPhone = contactDetails?.phones.find((p) => p.primary)?.number || tb("phone").replace(/\s/g, "");
+  const primaryEmail = contactDetails?.emails.find((e) => e.primary)?.address || tb("email");
+  const location = useTranslatable(contactDetails?.address, locale) || tb("location");
 
   return (
     <>
@@ -63,20 +69,19 @@ export default function Navbar({ locale }: { locale: string }) {
         <div className="max-w-7xl mx-auto px-6 h-8 flex items-center justify-between">
           <div className="flex items-center gap-5">
             <a
-              href={`tel:${tb("phone").replace(/\s/g, "")}`}
+              href={`tel:${primaryPhone.replace(/\s/g, "")}`}
               className="hover:text-[var(--brand-orange)] transition-colors"
             >
-              {tb("phone")}
+              {primaryPhone}
             </a>
             <span className="opacity-40">|</span>
             <a
-              href={`mailto:${tb("email")}`}
+              href={`mailto:${primaryEmail}`}
               className="hover:text-[var(--brand-orange)] transition-colors"
             >
-              {tb("email")}
+              {primaryEmail}
             </a>
-            <span className="opacity-40">|</span>
-            <span className="opacity-80">{tb("location")}</span>
+            <span className="opacity-80">{loading ? tb("location") : location}</span>
           </div>
           <span className="text-[var(--brand-orange)] font-semibold tracking-wide">
             {tb("vision")}
@@ -108,7 +113,7 @@ export default function Navbar({ locale }: { locale: string }) {
             </div>
             <div className="hidden sm:flex flex-col leading-none">
               <span className="font-bold text-[15px] text-foreground tracking-tight">
-                {isRtl ? "إيداركون" : "Edarcon"}
+                {siteName || (isRtl ? "إيداركون" : "Edarcon")}
               </span>
               <span className="text-[11px] text-[var(--brand-orange)] font-medium tracking-wide">
                 {isRtl ? "كونتراكتينج" : "Contracting"}
@@ -123,10 +128,10 @@ export default function Navbar({ locale }: { locale: string }) {
                 <Link
                   href={href}
                   className={cn(
-                    "relative px-3.5 py-2 rounded-lg text-sm font-medium transition-colors duration-150",
+                    "relative px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-150 whitespace-nowrap",
                     isActive(href)
                       ? "text-[var(--brand-blue)] dark:text-[var(--brand-orange)]"
-                      : "text-foreground/70 hover:text-foreground hover:bg-muted"
+                      : "text-foreground/70 hover:text-foreground hover:bg-muted",
                   )}
                 >
                   {t(key)}
@@ -140,7 +145,6 @@ export default function Navbar({ locale }: { locale: string }) {
 
           {/* Controls */}
           <div className="flex items-center gap-1.5">
-{/* Theme toggle */}
             {mounted && (
               <button
                 onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
@@ -162,6 +166,15 @@ export default function Navbar({ locale }: { locale: string }) {
               <Globe size={15} strokeWidth={2} />
               <span className="text-xs">{otherLocale === "ar" ? "عربي" : "EN"}</span>
             </button>
+
+            {/* Admin login link */}
+            <a
+              href="/admin/login"
+              className="hidden md:inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-sm font-medium text-foreground/60 hover:text-[var(--brand-orange)] hover:bg-muted transition-colors"
+            >
+              <ExternalLink className="w-3 h-3" />
+              Admin
+            </a>
 
             {/* Quote CTA — desktop */}
             <Link
@@ -186,7 +199,6 @@ export default function Navbar({ locale }: { locale: string }) {
       </header>
 
       {/* ── Mobile drawer ── */}
-      {/* Backdrop */}
       {drawerOpen && (
         <div
           className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm md:hidden"
@@ -195,7 +207,6 @@ export default function Navbar({ locale }: { locale: string }) {
         />
       )}
 
-      {/* Panel */}
       <div
         role="dialog"
         aria-modal="true"
@@ -209,14 +220,13 @@ export default function Navbar({ locale }: { locale: string }) {
             : isRtl ? "-translate-x-full" : "translate-x-full"
         )}
       >
-        {/* Drawer header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border">
           <div className="flex items-center gap-2.5">
             <div className="relative w-8 h-8 rounded-lg overflow-hidden">
               <Image src="/images/logo.jpeg" alt="Edarcon" fill className="object-contain" />
             </div>
             <span className="font-bold text-sm text-foreground">
-              {isRtl ? "إيداركون" : "Edarcon"}
+              {siteName || (isRtl ? "إيداركون" : "Edarcon")}
             </span>
           </div>
           <button
@@ -228,7 +238,6 @@ export default function Navbar({ locale }: { locale: string }) {
           </button>
         </div>
 
-        {/* Drawer links */}
         <nav className="flex-1 px-3 py-4 overflow-y-auto">
           <ul className="flex flex-col gap-1" role="list">
             {NAV_LINKS.map(({ key, href }) => (
@@ -240,7 +249,7 @@ export default function Navbar({ locale }: { locale: string }) {
                     "flex items-center justify-between px-3 py-3 rounded-xl text-sm font-medium transition-colors",
                     isActive(href)
                       ? "bg-[var(--brand-blue)]/10 text-[var(--brand-blue)] dark:text-[var(--brand-orange)]"
-                      : "text-foreground/70 hover:text-foreground hover:bg-muted"
+                      : "text-foreground/70 hover:text-foreground hover:bg-muted",
                   )}
                 >
                   {t(key)}
@@ -254,7 +263,6 @@ export default function Navbar({ locale }: { locale: string }) {
           </ul>
         </nav>
 
-        {/* Drawer footer */}
         <div className="px-4 py-4 border-t border-border space-y-3">
           <Link
             href="/contact"

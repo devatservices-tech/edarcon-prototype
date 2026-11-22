@@ -2,8 +2,10 @@
 
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
-import { Phone, Mail, MapPin, ArrowUp } from "lucide-react";
+import { Phone, Mail, MapPin, ArrowUp, ExternalLink } from "lucide-react";
+import { useAdminData, useTranslatable } from "@/lib/admin/data-provider";
 
 const SERVICE_KEYS = [
   "projectSupport",
@@ -36,10 +38,23 @@ export default function Footer({ locale }: { locale: string }) {
   const t  = useTranslations("footer");
   const ts = useTranslations("services.items");
   const year = new Date().getFullYear();
+  const { contactDetails, siteSettings, loading } = useAdminData();
+  const [mounted, setMounted] = useState(false);
 
+  useEffect(() => { setMounted(true); }, []);
+
+  const siteName = useTranslatable(siteSettings?.siteName, locale);
+  const tagline = useTranslatable(siteSettings?.tagline, locale);
+  const address = useTranslatable(contactDetails?.address, locale);
+  const workingHours = useTranslatable(contactDetails?.workingHours, locale);
+  const primaryPhone = contactDetails?.phones.find((p) => p.primary)?.number || "+966 55 902 1988";
+  const primaryEmail = contactDetails?.emails.find((e) => e.primary)?.address || "info@edarcon.com";
+  const whatsapp = contactDetails?.whatsapp || "+966 55 902 1988";
+  const socialLinks = siteSettings?.socialLinks || {};
+
+  // While loading, show seed data fallback (already in state via DataProvider)
   return (
     <footer className="bg-[var(--navy)] text-white/75">
-      {/* Orange accent bar */}
       <div className="h-1 w-full bg-gradient-to-r from-[var(--brand-blue)] via-[var(--brand-orange)] to-[var(--brand-blue)]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-14 pb-10">
@@ -52,12 +67,8 @@ export default function Footer({ locale }: { locale: string }) {
                 <Image src="/images/logo.jpeg" alt="Edarcon" fill className="object-contain" />
               </div>
               <div className="flex flex-col leading-none">
-                <span className="font-bold text-white text-[15px]">
-                  {locale === "ar" ? "إيداركون" : "Edarcon"}
-                </span>
-                <span className="text-[11px] text-[var(--brand-orange)] font-medium">
-                  {locale === "ar" ? "كونتراكتينج" : "Contracting"}
-                </span>
+                <span className="font-bold text-white text-[15px]">{siteName || (locale === "ar" ? "إيداركون" : "Edarcon")}</span>
+                <span className="text-[11px] text-[var(--brand-orange)] font-medium">{tagline || (locale === "ar" ? "كونتراكتينج" : "Contracting")}</span>
               </div>
             </Link>
             <p className="text-sm leading-relaxed text-white/50 max-w-xs">{t("blurb")}</p>
@@ -65,7 +76,7 @@ export default function Footer({ locale }: { locale: string }) {
             {/* Social */}
             <div className="flex items-center gap-3 mt-5">
               <a
-                href="https://www.linkedin.com/company/edarcon"
+                href={socialLinks.linkedin || "https://www.linkedin.com/company/edarcon"}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -74,7 +85,7 @@ export default function Footer({ locale }: { locale: string }) {
                 <LinkedInIcon />
               </a>
               <a
-                href="https://wa.me/966559021988"
+                href={`https://wa.me/${whatsapp.replace(/\D/g, "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
@@ -84,6 +95,17 @@ export default function Footer({ locale }: { locale: string }) {
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                 </svg>
               </a>
+              {socialLinks.website && (
+                <a
+                  href={socialLinks.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Website"
+                  className="p-2 rounded-lg bg-white/5 hover:bg-[var(--brand-blue)] text-white/50 hover:text-white transition-all"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              )}
             </div>
           </div>
 
@@ -122,6 +144,15 @@ export default function Footer({ locale }: { locale: string }) {
                   </Link>
                 </li>
               ))}
+              <li>
+                <a
+                  href="/admin/login"
+                  className="text-sm text-white/50 hover:text-[var(--brand-orange)] transition-colors flex items-center gap-1"
+                >
+                  <ExternalLink className="w-3 h-3" />
+                  Admin login
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -133,26 +164,26 @@ export default function Footer({ locale }: { locale: string }) {
             <ul className="space-y-3.5">
               <li>
                 <a
-                  href="tel:+966559021988"
+                  href={`tel:${primaryPhone.replace(/\s/g, "")}`}
                   className="flex items-start gap-2.5 text-sm text-white/50 hover:text-white transition-colors group"
                 >
                   <Phone size={14} className="mt-0.5 shrink-0 text-[var(--brand-orange)] group-hover:scale-110 transition-transform" />
-                  +966 55 902 1988
+                  {primaryPhone}
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:Edarcon@edarcon.com"
+                  href={`mailto:${primaryEmail}`}
                   className="flex items-start gap-2.5 text-sm text-white/50 hover:text-white transition-colors group"
                 >
                   <Mail size={14} className="mt-0.5 shrink-0 text-[var(--brand-orange)] group-hover:scale-110 transition-transform" />
-                  Edarcon@edarcon.com
+                  {primaryEmail}
                 </a>
               </li>
               <li className="flex items-start gap-2.5 text-sm text-white/50">
                 <MapPin size={14} className="mt-0.5 shrink-0 text-[var(--brand-orange)]" />
                 <span className="leading-relaxed">
-                  {t("address")}
+                  {loading ? t("address") : address}
                 </span>
               </li>
             </ul>

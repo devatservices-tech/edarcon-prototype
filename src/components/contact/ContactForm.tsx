@@ -3,9 +3,10 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Loader2, CheckCircle2, AlertCircle, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { createPublicRFQ } from "@/lib/admin/rfq-public";
 
 const schema = z.object({
   name:         z.string().min(2),
@@ -56,7 +57,22 @@ function Field({ id, label, error, children }: { id: string; label: string; erro
   );
 }
 
-export default function ContactForm({ labels, locale, prefillMessage }: { labels: Labels; locale: string; prefillMessage?: string }) {
+export default function ContactForm({
+  labels,
+  locale,
+  prefillMessage,
+  prefill,
+}: {
+  labels: Labels;
+  locale: string;
+  prefillMessage?: string;
+  prefill?: {
+    name?: string;
+    email?: string;
+    phone?: string;
+    service?: string;
+  };
+}) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const isAr = locale === "ar";
   const serviceOptions = isAr ? SERVICE_OPTIONS_AR : SERVICE_OPTIONS_EN;
@@ -64,9 +80,23 @@ export default function ContactForm({ labels, locale, prefillMessage }: { labels
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
+      name: prefill?.name || "",
+      email: prefill?.email || "",
+      phone: prefill?.phone || "",
+      service: prefill?.service || "",
       message: prefillMessage || "",
     },
   });
+
+  useEffect(() => {
+    reset({
+      name: prefill?.name || "",
+      email: prefill?.email || "",
+      phone: prefill?.phone || "",
+      service: prefill?.service || "",
+      message: prefillMessage || "",
+    });
+  }, [prefill, prefillMessage, reset]);
 
   async function onSubmit(data: FormData) {
     setStatus("loading");
@@ -77,6 +107,23 @@ export default function ContactForm({ labels, locale, prefillMessage }: { labels
         body: JSON.stringify(data),
       });
       if (!res.ok) throw new Error();
+      try {
+        const isAr = locale === "ar";
+        await createPublicRFQ({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          company: data.company,
+          service: data.service,
+          source: "contact",
+          language: (isAr ? "ar" : "en") as "en" | "ar",
+          message: isAr
+            ? { en: "", ar: data.message }
+            : { en: data.message, ar: "" },
+        });
+      } catch {
+        // RFQ creation is best-effort; contact submission still succeeded.
+      }
       setStatus("success");
       reset();
     } catch {
