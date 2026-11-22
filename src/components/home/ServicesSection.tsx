@@ -1,21 +1,13 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import SectionHeading from "@/components/SectionHeading";
-import ServiceCard from "@/components/ServiceCard";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import { Link } from "@/i18n/navigation";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const SERVICE_ICONS = {
-  projectSupport:  "HardHat",
-  sitePrep:        "Shovel",
-  dewatering:      "Droplets",
-  civilWorks:      "Building2",
-  scaffolding:     "Construction",
-  equipmentRental: "Truck",
-  manpower:        "Users",
-  facilityMgmt:    "Settings",
-} as const;
+import { useAdminData, usePublished, useOrdered } from "@/lib/admin/data-provider";
+import { ServiceSection } from "@/components/home/ServiceSection";
 
 const SERVICE_KEYS = [
   "projectSupport", "sitePrep", "dewatering", "civilWorks",
@@ -26,6 +18,15 @@ export default function ServicesSection({ locale }: { locale: string }) {
   const t     = useTranslations("services");
   const tc    = useTranslations("common");
   const isRtl = locale === "ar";
+  const { services, loading } = useAdminData();
+
+  const published = usePublished(services ?? []);
+  const ordered = useOrdered(published);
+
+  const sideItems = ordered.map((svc) => ({
+    id: svc.slug,
+    label: svc.name.en,
+  }));
 
   return (
     <section id="services" className="py-24 bg-background" aria-label="Services">
@@ -39,17 +40,21 @@ export default function ServicesSection({ locale }: { locale: string }) {
         </RevealOnScroll>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {SERVICE_KEYS.map((key, i) => (
-            <ServiceCard
-              key={key}
-              icon={SERVICE_ICONS[key]}
-              title={t(`items.${key}.title`)}
-              desc={t(`items.${key}.desc`)}
-              href={`/services#${key}`}
-              learnMore={tc("learnMore")}
-              index={i}
-            />
-          ))}
+          {loading ? (
+            SERVICE_KEYS.map((key, i) => (
+              <div key={key} className="animate-pulse bg-muted rounded-2xl h-64" />
+            ))
+          ) : (
+            ordered.map((svc, i) => (
+              <ServiceSection
+                key={svc.id}
+                svc={svc}
+                locale={locale}
+                isRtl={isRtl}
+                index={i}
+              />
+            ))
+          )}
         </div>
 
         <RevealOnScroll delay={0.2} className="mt-12 flex justify-center">

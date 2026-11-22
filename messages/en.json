@@ -5,6 +5,8 @@
     "equipment": "Equipment",
     "catalog": "Catalog",
     "about": "About",
+    "qualityHse": "Quality & HSE",
+    "projects": "Projects & Experience",
     "contact": "Contact",
     "requestQuote": "Request a Quote"
   },
@@ -187,7 +189,12 @@
       "infra": "Infrastructure",
       "chem": "Chemicals"
     },
-    "approvedVendors": ["Saudi Aramco", "Saudi Electricity Company", "SABIC", "Ma'aden"]
+    "approvedVendors": [
+      "Saudi Aramco",
+      "Saudi Electricity Company",
+      "SABIC",
+      "Ma'aden"
+    ]
   },
   "faq": {
     "title": "Frequently Asked Questions",
@@ -295,6 +302,131 @@
     "viewAll": "View All",
     "backToTop": "Back to Top"
   },
+  "qualityHse": {
+    "title": "Quality & HSE",
+    "subtitle": "Quality, safety and environmental management across all EDARCON operations.",
+    "nav": "Quality & HSE",
+    "hero": {
+      "eyebrow": "Quality, Health, Safety & Environment",
+      "title": "Quality, Safety & Responsibility in Every Operation",
+      "description": "At EDARCON, quality and safety are essential parts of how we approach industrial services, engineering support and project execution. We are committed to maintaining responsible working practices, supporting safe operations and delivering services with a focus on quality and reliability.",
+      "ctaCertifications": "Explore Our Certifications",
+      "ctaContact": "Contact Our Team"
+    },
+    "commitment": {
+      "eyebrow": "Our Quality Commitment",
+      "title": "Committed to Quality at Every Stage",
+      "description": "EDARCON aims to maintain a consistent focus on quality throughout its operations. From understanding client requirements and planning activities to service execution and final delivery, we recognize the importance of responsible processes, technical competence and attention to detail.\n\nOur approach emphasizes meeting agreed project requirements, maintaining effective communication and continually improving the way we deliver our services.",
+      "cards": {
+        "qualityFocus": { "title": "Quality Focus", "desc": "Attention to agreed requirements and service standards." },
+        "processDiscipline": { "title": "Process Discipline", "desc": "Structured planning and responsible execution." },
+        "continuousImprovement": { "title": "Continuous Improvement", "desc": "A focus on improving operational practices and performance." }
+      }
+    },
+    "certifications": {
+      "eyebrow": "Our Management System Certifications",
+      "title": "ISO Certifications",
+      "subtitle": "EDARCON's company profile references the following international management system certifications. These standards provide a framework for quality management, environmental responsibility and occupational health and safety.",
+      "verificationNote": "Certificate thumbnails are displayed from scans provided by EDARCON. Certificate numbers, validity dates and the certification body remain pending document review. These standards are not presented as proof of current certification until those details have been checked.",
+      "items": {
+        "iso9001": { "standard": "ISO 9001", "name": "Quality Management", "desc": "Quality management systems and a consistent focus on meeting customer and applicable requirements.", "number": "Certificate number: Pending verification", "validity": "Validity: Pending verification", "body": "Certification body: Pending verification" },
+        "iso14001": { "standard": "ISO 14001", "name": "Environmental Management", "desc": "Environmental management and responsible consideration of environmental impacts.", "number": "Certificate number: Pending verification", "validity": "Validity: Pending verification", "body": "Certification body: Pending verification" },
+        "iso45001": { "standard": "ISO 45001", "name": "Occupational Health & Safety", "desc": "Occupational health and safety management and the prevention of work-related injury and ill health.", "number": "Certificate number: Pending verification", "validity": "Validity: Pending verification", "body": "Certification body: Pending verification" }
+      },
+      "viewCertificate": "View Certificate",
+      "downloadPdf": "Download PDF",
+      "placeholder": "Pending verification"
+    },
+    "safety": {
+      "eyebrow": "Health & Safety Commitment",
+      "title": "Safety Is Part of Every Job",
+      "description": "Industrial environments require careful planning, awareness and responsible execution. EDARCON recognizes the importance of protecting its workforce, clients, contractors and surrounding environment.\n\nWe aim to promote safe working practices through appropriate personal protective equipment, awareness of site requirements, responsible work execution and attention to potential operational risks.",
+      "cards": {
+        "ppe": "Personal Protective Equipment (PPE)",
+        "hazardAwareness": "Workplace Hazard Awareness",
+        "safeWorkPractices": "Safe Work Practices",
+        "siteCoordination": "Site Coordination",
+        "environmentalResponsibility": "Environmental Responsibility",
+        "workforceSafetyAwareness": "Workforce Safety Awareness"
+      },
+      "note": "Presented as areas of commitment, not as claims that specific formal procedures or training programs exist unless EDARCON confirms them."
+    },
+    "documents": {
+      "eyebrow": "Documents & Certifications",
+      "title": "Quality & HSE Documentation",
+      "description": "Access relevant company documentation and supporting materials to learn more about EDARCON's quality, safety and operational commitments.",
+      "items": {
+        "companyProfile": { "title": "Company Profile", "desc": "Overview of EDARCON's capabilities, approvals and track record." },
+        "hsePolicy": { "title": "HSE Policy", "desc": "Statement of health, safety and environmental commitments." },
+        "qualityPolicy": { "title": "Quality Policy", "desc": "Commitment to quality management and continual improvement." },
+        "isoRegister": { "title": "ISO Certificate Register", "desc": "List of referenced management system certifications." },
+        "approvedVendors": { "title": "Approved Vendor List", "desc": "Client approvals and vendor registrations." }
+      },
+      "download": "Download",
+      "unavailable": "Document pending release from EDARCON."
+    },
+    "contact": {
+      "eyebrow": "Get In Touch",
+      "title": "Ready to discuss your project?",
+      "subtitle": "Our team is ready to support your next mobilization.",
+      "cta": "Request a Quote"
+    }
+  },
+  "projects": {
+    "heroEyebrow": "Project Experience",
+    "heroTitle": "Experience That Supports Industrial Performance",
+    "heroDesc": "EDARCON provides industrial services, engineering support, equipment rental, manpower and material supply for industrial and infrastructure requirements.\n\nExplore our project experience, service capabilities and operational activities across different industrial service areas.",
+    "ctaExplore": "Explore Projects",
+    "ctaDiscuss": "Discuss Your Project",
+    "introEyebrow": "Our Project Experience",
+    "introTitle": "Our Project Experience",
+    "introBody1": "Our capabilities span industrial maintenance, mechanical services, equipment support, manpower solutions and general contracting activities.",
+    "introBody2": "We understand that every project has its own operational requirements, site conditions and execution challenges. Our focus is to understand client needs and provide appropriate resources and service support to meet the agreed scope of work.",
+    "introNote": "Content is kept general until EDARCON provides approved project records.",
+    "portfolioEyebrow": "Our Projects & Service Activities",
+    "portfolioTitle": "Our Projects & Service Activities",
+    "portfolioDesc": "Explore selected project activities and service capabilities delivered by EDARCON. Each project profile can highlight the scope of work, technical requirements, execution approach and relevant resources.",
+    "portfolioDisclaimer": "These are proposed portfolio categories based on EDARCON's stated service offerings, not confirmed completed projects. Use actual project records and photographs before labelling any item as a completed project.",
+    "categories": {
+      "industrialMechanical": "Industrial & Mechanical Services",
+      "pwht": "PWHT / Heat Treatment",
+      "bolting": "Bolt Torquing & Tensioning",
+      "heatExchanger": "Heat Exchanger Retubing",
+      "motorsPumps": "Motors & Pumps Services",
+      "manpower": "Manpower & Operational Support",
+      "roadSigns": "Road Signs & Infrastructure"
+    },
+    "caseStudiesEyebrow": "Project Case Studies",
+    "caseStudiesTitle": "Project Case Studies",
+    "caseOverview": "Overview",
+    "caseCategory": "Category",
+    "caseResources": "Resources",
+    "caseOutcome": "Outcome",
+    "caseScope": "Scope of Work",
+    "caseDiscuss": "Discuss This Project",
+    "caseVerified": "Use verified project details and approved photographs before publishing.",
+    "caseStudiesDisclaimer": "Each case study should be built from verified project details and approved photographs before publishing.",
+    "galleryEyebrow": "On-Site Operations & Activities",
+    "galleryTitle": "On-Site Operations & Activities",
+    "galleryDesc": "A closer look at our industrial service activities, equipment and operational support.",
+    "galleryDisclaimer": "For the real website, use EDARCON's own photographs. Stock images are acceptable as temporary prototype placeholders but should not be presented as company project evidence.",
+    "industriesEyebrow": "Supporting Diverse Industrial Requirements",
+    "industriesTitle": "Supporting Diverse Industrial Requirements",
+    "industries": {
+      "oilGas": "Oil & Gas",
+      "petrochemical": "Petrochemical",
+      "refining": "Refining",
+      "manufacturing": "Manufacturing",
+      "industrialFacilities": "Industrial Facilities",
+      "infrastructure": "Infrastructure"
+    },
+    "industriesDisclaimer": "Possible industry categories, subject to EDARCON confirming its actual client and project sectors. Avoid implying completed projects in any sector without supporting references.",
+    "ctaEyebrow": "Final CTA",
+    "ctaTitle": "Have an Industrial Project in Mind?",
+    "ctaDesc": "Whether you require mechanical services, heat treatment, equipment rental, manpower or industrial support, connect with EDARCON to discuss your project requirements.",
+    "ctaRequestQuote": "Request a Quote",
+    "ctaContactTeam": "Contact Our Team"
+  },
   "catalog": {
     "title": "Equipment Catalog",
     "eyebrow": "Plant & Equipment",
@@ -356,129 +488,351 @@
         "name": "Mobile Crane 25T",
         "shortDescription": "Road-legal all-terrain crane for general lifting work.",
         "description": "A road-legal all-terrain mobile crane with 25 tonne capacity, suited to lifting and positioning across plant sites and confined yards. Supplied with a certified rigger-operator, full rigging gear and a current load chart.",
-        "features": ["Certified operator and banksman supplied", "Full rigging set: slings, shackles, spreader bar", "Current third-party load test certificate", "Suited to confined and uneven terrain"],
-        "applications": ["Plant lifts and machinery positioning", "Structural steel placement", "Confined-yard material handling"],
-        "specs": { "maxCapacity": "Max capacity", "boomLength": "Boom length", "drive": "Drive", "operator": "Operator" }
+        "features": [
+          "Certified operator and banksman supplied",
+          "Full rigging set: slings, shackles, spreader bar",
+          "Current third-party load test certificate",
+          "Suited to confined and uneven terrain"
+        ],
+        "applications": [
+          "Plant lifts and machinery positioning",
+          "Structural steel placement",
+          "Confined-yard material handling"
+        ],
+        "specs": {
+          "maxCapacity": "Max capacity",
+          "boomLength": "Boom length",
+          "drive": "Drive",
+          "operator": "Operator"
+        }
       },
       "crawler-crane-100t": {
         "name": "Crawler Crane 100T",
         "shortDescription": "Tracked lattice-boom crane for heavy lifts.",
         "description": "High-capacity crawler crane with lattice boom for heavy lifts on industrial and infrastructure sites. Tracks suit soft and uneven ground; supplied with certified crew and full load documentation.",
-        "features": ["Certified operator supplied", "100 tonne lifting capacity", "Lattice boom configuration", "Tracked undercarriage for soft ground"],
-        "applications": ["Heavy structural lifts", "Industrial plant erection", "Infrastructure projects"],
-        "specs": { "maxCapacity": "Max capacity", "boomType": "Boom type", "drive": "Drive", "groundPressure": "Ground pressure" }
+        "features": [
+          "Certified operator supplied",
+          "100 tonne lifting capacity",
+          "Lattice boom configuration",
+          "Tracked undercarriage for soft ground"
+        ],
+        "applications": [
+          "Heavy structural lifts",
+          "Industrial plant erection",
+          "Infrastructure projects"
+        ],
+        "specs": {
+          "maxCapacity": "Max capacity",
+          "boomType": "Boom type",
+          "drive": "Drive",
+          "groundPressure": "Ground pressure"
+        }
       },
       "forklift-5t": {
         "name": "Forklift 5T",
         "shortDescription": "5 tonne diesel rough-terrain forklift.",
         "description": "5 tonne diesel forklift rated for rough terrain, ideal for yard and construction material handling. Heavy-duty tyres with high ground clearance.",
-        "features": ["5 tonne capacity", "Diesel engine", "Rough-terrain tyres", "High ground clearance"],
-        "applications": ["Yard material handling", "Loading and unloading", "Construction site logistics"],
-        "specs": { "capacity": "Capacity", "fuel": "Fuel", "terrain": "Terrain", "tyres": "Tyres" }
+        "features": [
+          "5 tonne capacity",
+          "Diesel engine",
+          "Rough-terrain tyres",
+          "High ground clearance"
+        ],
+        "applications": [
+          "Yard material handling",
+          "Loading and unloading",
+          "Construction site logistics"
+        ],
+        "specs": {
+          "capacity": "Capacity",
+          "fuel": "Fuel",
+          "terrain": "Terrain",
+          "tyres": "Tyres"
+        }
       },
       "excavator-20t": {
         "name": "Excavator 20T",
         "shortDescription": "20 tonne hydraulic excavator with long reach.",
         "description": "20 tonne tracked excavator with long-reach arm for excavation, trenching and demolition. Fully serviced; certified operator available.",
-        "features": ["20 tonne operating weight", "Long-reach arm", "Hydraulic attachments ready", "Certified operator available"],
-        "applications": ["Bulk excavation and trenching", "Demolition work", "Site preparation"],
-        "specs": { "operatingWeight": "Operating weight", "armType": "Arm type", "drive": "Drive", "attachments": "Attachments" }
+        "features": [
+          "20 tonne operating weight",
+          "Long-reach arm",
+          "Hydraulic attachments ready",
+          "Certified operator available"
+        ],
+        "applications": [
+          "Bulk excavation and trenching",
+          "Demolition work",
+          "Site preparation"
+        ],
+        "specs": {
+          "operatingWeight": "Operating weight",
+          "armType": "Arm type",
+          "drive": "Drive",
+          "attachments": "Attachments"
+        }
       },
       "wheel-loader-3m3": {
         "name": "Wheel Loader 3m³",
         "shortDescription": "3 m³ bucket wheel loader for loading and stockpiling.",
         "description": "3 m³ wheel loader with 4WD for loading, stockpiling and material handling on site. Productive and manoeuvrable for civil and plant work.",
-        "features": ["3 m³ bucket", "4WD drive", "Material handling", "Certified operator available"],
-        "applications": ["Loading and stockpiling", "Material handling", "Civil and plant work"],
-        "specs": { "bucketCapacity": "Bucket capacity", "drive": "Drive", "type": "Type" }
+        "features": [
+          "3 m³ bucket",
+          "4WD drive",
+          "Material handling",
+          "Certified operator available"
+        ],
+        "applications": [
+          "Loading and stockpiling",
+          "Material handling",
+          "Civil and plant work"
+        ],
+        "specs": {
+          "bucketCapacity": "Bucket capacity",
+          "drive": "Drive",
+          "type": "Type"
+        }
       },
       "backhoe-loader": {
         "name": "Backhoe Loader",
         "shortDescription": "4WD backhoe loader with extendable dipper.",
         "description": "Versatile backhoe loader with front loader and rear backhoe, 4WD and extendable dipper. Suitable for trenching, loading and general site work.",
-        "features": ["4WD backhoe loader", "Extendable dipper", "Front loader and backhoe", "Certified operator available"],
-        "applications": ["Trenching and utility work", "Loading and backfilling", "General site work"],
-        "specs": { "drive": "Drive", "dipper": "Dipper", "functions": "Functions" }
+        "features": [
+          "4WD backhoe loader",
+          "Extendable dipper",
+          "Front loader and backhoe",
+          "Certified operator available"
+        ],
+        "applications": [
+          "Trenching and utility work",
+          "Loading and backfilling",
+          "General site work"
+        ],
+        "specs": {
+          "drive": "Drive",
+          "dipper": "Dipper",
+          "functions": "Functions"
+        }
       },
       "diesel-generator-100kva": {
         "name": "Diesel Generator 100 kVA",
         "shortDescription": "100 kVA soundproofed diesel generator for site power.",
         "description": "100 kVA diesel generator in a soundproofed canopy for site power and standby applications. Fuel-efficient and ready for immediate deployment.",
-        "features": ["100 kVA prime power", "Diesel engine", "Soundproofed canopy", "Auto-start capable"],
-        "applications": ["Site power supply", "Standby power", "Temporary power for events"],
-        "specs": { "powerRating": "Power rating", "fuel": "Fuel", "canopy": "Canopy", "start": "Start" }
+        "features": [
+          "100 kVA prime power",
+          "Diesel engine",
+          "Soundproofed canopy",
+          "Auto-start capable"
+        ],
+        "applications": [
+          "Site power supply",
+          "Standby power",
+          "Temporary power for events"
+        ],
+        "specs": {
+          "powerRating": "Power rating",
+          "fuel": "Fuel",
+          "canopy": "Canopy",
+          "start": "Start"
+        }
       },
       "light-tower-led": {
         "name": "LED Light Tower",
         "shortDescription": "Mobile LED light tower for night works.",
         "description": "Mobile LED light tower with mast-mounted fittings for night works and secure site illumination. Low fuel consumption and quiet operation.",
-        "features": ["LED mast lighting", "Mobile trailer chassis", "Low fuel consumption", "Dusk-to-dawn sensor"],
-        "applications": ["Night works illumination", "Site security lighting", "Roadwork and event lighting"],
-        "specs": { "lightingType": "Lighting type", "chassis": "Chassis", "operation": "Operation", "runtime": "Runtime" }
+        "features": [
+          "LED mast lighting",
+          "Mobile trailer chassis",
+          "Low fuel consumption",
+          "Dusk-to-dawn sensor"
+        ],
+        "applications": [
+          "Night works illumination",
+          "Site security lighting",
+          "Roadwork and event lighting"
+        ],
+        "specs": {
+          "lightingType": "Lighting type",
+          "chassis": "Chassis",
+          "operation": "Operation",
+          "runtime": "Runtime"
+        }
       },
       "air-compressor-185cfm": {
         "name": "Air Compressor 185 CFM",
         "shortDescription": "185 CFM towable diesel air compressor.",
         "description": "185 CFM towable diesel air compressor for pneumatic tools, blasting and site air supply. Road-towable and ready for deployment.",
-        "features": ["185 CFM free air delivery", "Diesel driven", "Towable chassis", "Pneumatic tool ready"],
-        "applications": ["Pneumatic tool operation", "Sandblasting and surface preparation", "Site air supply"],
-        "specs": { "freeAirDelivery": "Free air delivery", "drive": "Drive", "chassis": "Chassis", "pressure": "Pressure" }
+        "features": [
+          "185 CFM free air delivery",
+          "Diesel driven",
+          "Towable chassis",
+          "Pneumatic tool ready"
+        ],
+        "applications": [
+          "Pneumatic tool operation",
+          "Sandblasting and surface preparation",
+          "Site air supply"
+        ],
+        "specs": {
+          "freeAirDelivery": "Free air delivery",
+          "drive": "Drive",
+          "chassis": "Chassis",
+          "pressure": "Pressure"
+        }
       },
       "well-point-system": {
         "name": "Well-Point Dewatering System",
         "shortDescription": "Well-point system to keep excavations dry.",
         "description": "Well-point dewatering system engineered to lower groundwater and keep excavations dry and safe. Includes headers, pumps and discharge management.",
-        "features": ["Groundwater lowering", "Header and riser pipework", "Pump package included", "Discharge management"],
-        "applications": ["Excavation dewatering", "Foundation works", "Trenching in high water table"],
-        "specs": { "systemType": "System type", "capacity": "Capacity", "pumps": "Pumps", "discharge": "Discharge" }
+        "features": [
+          "Groundwater lowering",
+          "Header and riser pipework",
+          "Pump package included",
+          "Discharge management"
+        ],
+        "applications": [
+          "Excavation dewatering",
+          "Foundation works",
+          "Trenching in high water table"
+        ],
+        "specs": {
+          "systemType": "System type",
+          "capacity": "Capacity",
+          "pumps": "Pumps",
+          "discharge": "Discharge"
+        }
       },
       "submersible-trash-pump": {
         "name": "Submersible Trash Pump",
         "shortDescription": "Submersible pump for trash and site water.",
         "description": "Heavy-duty submersible trash pump for removing site water, slurry and dewatering flows. Solids-handling impeller for dirty water applications.",
-        "features": ["Solids-handling impeller", "Submersible construction", "Portable and rugged", "Rapid deployment"],
-        "applications": ["Site water removal", "Slurry and dirty water", "Basement and pit dewatering"],
-        "specs": { "type": "Type", "application": "Application", "impeller": "Impeller", "mounting": "Mounting" }
+        "features": [
+          "Solids-handling impeller",
+          "Submersible construction",
+          "Portable and rugged",
+          "Rapid deployment"
+        ],
+        "applications": [
+          "Site water removal",
+          "Slurry and dirty water",
+          "Basement and pit dewatering"
+        ],
+        "specs": {
+          "type": "Type",
+          "application": "Application",
+          "impeller": "Impeller",
+          "mounting": "Mounting"
+        }
       },
       "tube-fitting-scaffold": {
         "name": "Tube-and-Fitting Scaffold",
         "shortDescription": "Traditional tube-and-fitting scaffold system.",
         "description": "Tube-and-fitting scaffold erected by certified riggers following TG20 practice. Flexible system for façades, structures and complex geometries.",
-        "features": ["TG20 compliant design", "Certified scaffold erectors", "Scaffold tagging and inspection", "Flexible geometry"],
-        "applications": ["Facade access", "Structural work", "Complex geometry access"],
-        "specs": { "system": "System", "compliance": "Compliance", "erectors": "Erectors", "inspection": "Inspection" }
+        "features": [
+          "TG20 compliant design",
+          "Certified scaffold erectors",
+          "Scaffold tagging and inspection",
+          "Flexible geometry"
+        ],
+        "applications": [
+          "Facade access",
+          "Structural work",
+          "Complex geometry access"
+        ],
+        "specs": {
+          "system": "System",
+          "compliance": "Compliance",
+          "erectors": "Erectors",
+          "inspection": "Inspection"
+        }
       },
       "scissor-lift-12m": {
         "name": "Scissor Lift 12 m",
         "shortDescription": "12 m electric scissor lift for work at height.",
         "description": "12 m electric scissor lift for safe work at height indoors and on finished floors. Zero-emission, non-marking tyres and compact platform.",
-        "features": ["12 m working height", "Electric drive", "Non-marking tyres", "Compact platform"],
-        "applications": ["Fit-out and finishing", "MEP installation", "Indoor work at height"],
-        "specs": { "workingHeight": "Working height", "drive": "Drive", "tyres": "Tyres", "emission": "Emission" }
+        "features": [
+          "12 m working height",
+          "Electric drive",
+          "Non-marking tyres",
+          "Compact platform"
+        ],
+        "applications": [
+          "Fit-out and finishing",
+          "MEP installation",
+          "Indoor work at height"
+        ],
+        "specs": {
+          "workingHeight": "Working height",
+          "drive": "Drive",
+          "tyres": "Tyres",
+          "emission": "Emission"
+        }
       },
       "pickup-4x4": {
         "name": "Pickup 4×4",
         "shortDescription": "4×4 pickup for site supervision and crew transport.",
         "description": "4×4 pickup (Toyota Hilux or equivalent) for site supervision, crew transport and off-road access on project sites. Driver included.",
-        "features": ["4×4 drive", "Off-road capable", "Driver included", "Site supervision ready"],
-        "applications": ["Site supervision", "Crew transport", "Off-road site access"],
-        "specs": { "drive": "Drive", "model": "Model", "type": "Type", "driver": "Driver" }
+        "features": [
+          "4×4 drive",
+          "Off-road capable",
+          "Driver included",
+          "Site supervision ready"
+        ],
+        "applications": [
+          "Site supervision",
+          "Crew transport",
+          "Off-road site access"
+        ],
+        "specs": {
+          "drive": "Drive",
+          "model": "Model",
+          "type": "Type",
+          "driver": "Driver"
+        }
       },
       "personnel-bus-30": {
         "name": "Personnel Bus 30-Seat",
         "shortDescription": "30-seat air-conditioned crew bus.",
         "description": "30-seat personnel bus with air conditioning and safety belts for workforce transport to and from site. Comfortable and safety-compliant.",
-        "features": ["30 passenger seats", "Air conditioning", "Safety belts", "Driver included"],
-        "applications": ["Workforce transport", "Crew rotation", "Site-to-site transfer"],
-        "specs": { "capacity": "Capacity", "cooling": "Cooling", "type": "Type", "driver": "Driver" }
+        "features": [
+          "30 passenger seats",
+          "Air conditioning",
+          "Safety belts",
+          "Driver included"
+        ],
+        "applications": [
+          "Workforce transport",
+          "Crew rotation",
+          "Site-to-site transfer"
+        ],
+        "specs": {
+          "capacity": "Capacity",
+          "cooling": "Cooling",
+          "type": "Type",
+          "driver": "Driver"
+        }
       },
       "site-cabin-portacabin": {
         "name": "Site Cabin (Portacabin)",
         "shortDescription": "Portable site office and accommodation cabin.",
         "description": "Portable site cabin/portacabin for site offices, welfare and worker accommodation. Insulated, wired and ready for rapid deployment.",
-        "features": ["Insulated panels", "Electrical wiring included", "Rapid deployment", "Welfare-ready"],
-        "applications": ["Site offices", "Welfare facilities", "Worker accommodation"],
-        "specs": { "type": "Type", "use": "Use", "insulation": "Insulation", "deployment": "Deployment" }
+        "features": [
+          "Insulated panels",
+          "Electrical wiring included",
+          "Rapid deployment",
+          "Welfare-ready"
+        ],
+        "applications": [
+          "Site offices",
+          "Welfare facilities",
+          "Worker accommodation"
+        ],
+        "specs": {
+          "type": "Type",
+          "use": "Use",
+          "insulation": "Insulation",
+          "deployment": "Deployment"
+        }
       }
     }
   },
@@ -498,5 +852,134 @@
     "itemsLabel": "Items",
     "totalItems": "{n} item(s)",
     "continueShopping": "Continue browsing"
+  },
+  "chatbot": {
+    "title": "Edarcon Assistant",
+    "online": "Online",
+    "close": "Close chat",
+    "minimize": "Minimize",
+    "restart": "Restart chat",
+    "send": "Send",
+    "skip": "Skip",
+    "restartHint": "Type 'restart' to start over",
+    "greeting": "Welcome to Edarcon. I can help you with our services and send you our catalog. What are you looking for?",
+    "noMatch": "Sorry, I couldn't find that. Please pick one of the services below.",
+    "askName": "Great choice. Before I share details, may I have your name?",
+    "askEmail": "Thank you, {name}. What is your email address?",
+    "emailInvalid": "That email doesn't look right, please try again",
+    "askPhone": "And your phone number? (international format, e.g. +966 55 902 1988)",
+    "phoneInvalid": "That phone number doesn't look right, please try again",
+    "askDetails": "Any details about your requirement? (site location, quantity, timeline)",
+    "confirmation": "Thanks {name}, we've noted your request for {service}.",
+    "downloadPdf": "Download {service} PDF",
+    "downloadCatalog": "Download Full Company Catalog",
+    "exploreAnother": "Explore another service",
+    "talkWhatsApp": "Talk on WhatsApp",
+    "requestQuote": "Request a quote",
+    "endChat": "End chat",
+    "leadSaved": "Thank you! Your request has been saved locally.",
+    "placeholderName": "Your name",
+    "placeholderEmail": "name@company.com",
+    "placeholderPhone": "+966 55 902 1988",
+    "placeholderDetails": "Site location, quantity, timeline...",
+    "typing": "Edarcon Assistant is typing…",
+    "services": {
+      "projectSupport": {
+        "title": "Project Support Services",
+        "highlights": "Site mobilization planning & execution|||Temporary facilities & laydown areas|||Logistics coordination & supply chain|||Standby crews for reactive support",
+        "keywords": {
+          "en": "project support|||projects|||support|||mobilization|||site mobilization|||standby crews",
+          "ar": "دعم|||مشاريع|||دعم المشاريع|||تعبئة الموقع|||طواقم|||لوجستيات"
+        }
+      },
+      "sitePrep": {
+        "title": "Site Preparation",
+        "highlights": "Land clearing & vegetation removal|||Bulk earthworks & grading|||Access road construction|||Laydown yard preparation",
+        "keywords": {
+          "en": "site preparation|||site prep|||clearing|||grading|||earthworks|||access roads|||laydown",
+          "ar": "تجهيز|||الموقع|||تجهيز الموقع|||تسوية|||تنظيف|||الأرض"
+        }
+      },
+      "dewatering": {
+        "title": "De-Watering",
+        "highlights": "Well-point dewatering systems|||Submersible & centrifugal pump systems|||Sump pumping & drainage|||Groundwater monitoring",
+        "keywords": {
+          "en": "dewatering|||de-watering|||water|||pump|||excavation|||dry|||well point",
+          "ar": "تصريف|||المياه|||حفريات|||جفاف|||مضخات|||نقاط الآبار"
+        }
+      },
+      "civilWorks": {
+        "title": "Civil Works",
+        "highlights": "Reinforced concrete foundations|||Underground utility installation|||Structural civil packages|||Drainage & culvert works",
+        "keywords": {
+          "en": "civil|||civil works|||foundation|||concrete|||utilities|||structural|||drainage",
+          "ar": "مدني|||أعمال مدنية|||أساسات|||خرسانة|||مرافق|||إنشائية|||صرف"
+        }
+      },
+      "scaffolding": {
+        "title": "Scaffolding",
+        "highlights": "Tube-and-fitting scaffold systems|||System scaffold (Layher / Haki)|||TG20 compliant design & erection|||Certified scaffold inspectors",
+        "keywords": {
+          "en": "scaffolding|||scaffold|||tube and fitting|||TG20|||riggers|||work at height",
+          "ar": "سقالات|||سقالة|||أنابيب|||تركيب|||TG20|||أعمال علوية"
+        }
+      },
+      "equipmentRental": {
+        "title": "Equipment Rental",
+        "highlights": "Mobile cranes (25T – 500T)|||Excavators & backhoe loaders|||Diesel generators (20kVA – 1000kVA)|||Wheel loaders & telehandlers",
+        "keywords": {
+          "en": "equipment|||rental|||crane|||excavator|||generator|||loader|||hire|||rent",
+          "ar": "معدات|||تأجير|||رافعات|||حفارات|||مولدات|||روافع"
+        }
+      },
+      "manpower": {
+        "title": "Manpower Support",
+        "highlights": "Coded welders (SMAW, GTAW, FCAW)|||Certified riggers & banksmen|||Electricians & instrumentation technicians|||General helpers & labourers",
+        "keywords": {
+          "en": "manpower|||labour|||labor|||welder|||rigger|||electrician|||helpers|||workforce",
+          "ar": "قوى عاملة|||يد عاملة|||لحامون|||كهربائيون|||عمال|||مساعدون|||عمالة"
+        }
+      },
+        "facilityMgmt": {
+        "title": "Facility Management",
+        "highlights": "Planned preventive maintenance (PPM)|||Corrective & reactive maintenance|||Housekeeping & janitorial services|||Pest control & waste management",
+        "keywords": {
+          "en": "facility|||facilities|||maintenance|||management|||PPM|||O&M|||housekeeping",
+          "ar": "مرافق|||إدارة مرافق|||صيانة|||تشغيل|||نظافة|||إدارة النفايات"
+        }
+      }
+    },
+    "validation": {
+      "nameTooShort": "Name must be at least 2 characters.",
+      "nameTooLong": "Name must be under 60 characters.",
+      "nameInvalid": "Please enter a valid name using letters, spaces, or hyphens.",
+      "detailsTooLong": "Details must be under 500 characters."
+    },
+    "skipAfterFails": "Having trouble? You can skip this step.",
+    "contactInstead": "Contact us instead",
+    "endThankYou": "Thank you for chatting with Edarcon!",
+    "endStartNew": "Start new chat",
+    "pdfOpen": "Open PDF",
+    "pdfDownload": "Download PDF",
+    "pdfFileSize": "File size",
+    "pdfFallback": "This document isn't available right now.",
+    "pdfFallbackWhatsApp": "Message us on WhatsApp for a copy",
+    "teaser": "Need help? Ask us"
+  },
+  "admin": {
+    "title": "Chat Leads",
+    "subtitle": "Leads saved locally (prototype)",
+    "backToSite": "Back to site",
+    "copyCsv": "Copy as CSV",
+    "colId": "ID",
+    "colName": "Name",
+    "colEmail": "Email",
+    "colPhone": "Phone",
+    "colService": "Service",
+    "colDetails": "Details",
+    "colLocale": "Locale",
+    "colCreatedAt": "Created",
+    "colTopics": "Topics",
+    "noLeads": "No leads yet."
   }
 }
