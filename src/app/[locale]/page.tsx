@@ -9,6 +9,8 @@ import ProcessSection from "@/components/home/ProcessSection";
 import SectorsSection from "@/components/home/SectorsSection";
 import FAQSection from "@/components/home/FAQSection";
 import CTASection from "@/components/home/CTASection";
+import { FeaturedEquipment } from "@/components/catalog/FeaturedEquipment";
+import { PRODUCTS } from "@/data/catalog";
 
 export async function generateMetadata({
   params,
@@ -32,6 +34,13 @@ export default async function HomePage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const tc = await getTranslations({ locale, namespace: "catalog" });
+  const isRtl = locale === "ar";
+  const featuredProducts = PRODUCTS.map((product) => ({
+    ...product,
+    name: tc.raw(`products.${product.id}.name`) as string || product.id,
+    shortDescription: tc.raw(`products.${product.id}.shortDescription`) as string || "",
+  }));
 
   return (
     <>
@@ -39,6 +48,13 @@ export default async function HomePage({
       <StatsSection locale={locale} />
       <VendorMarquee locale={locale} />
       <ServicesSection locale={locale} />
+      <FeaturedEquipment
+        products={featuredProducts}
+        isRtl={isRtl}
+        title={isRtl ? "فهرس المعدات" : "Equipment Catalogue"}
+        subtitle={isRtl ? "استكشف معداتنا المتاحة للتأجير والتوريد" : "Explore our equipment available for hire and supply"}
+        viewAllLabel={isRtl ? "عرض جميع المعدات" : "View All Equipment"}
+      />
       <AboutSection locale={locale} />
       <ProcessSection />
       <SectorsSection locale={locale} />

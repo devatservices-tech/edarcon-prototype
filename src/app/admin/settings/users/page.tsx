@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import { validateSession, canAccessRoute } from "@/lib/admin/session";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { PageHeader } from "@/components/admin/PageHeader";
-import { ADMIN_SIDEBAR_ITEMS } from "@/components/admin/nav";
 import { EmptyState } from "@/components/admin/EmptyState";
 
 export default async function SettingsUsersPage() {
@@ -13,7 +12,7 @@ export default async function SettingsUsersPage() {
 
   const user = { name: session.name, email: session.email, role: session.role };
   return (
-    <AdminLayout user={user} sidebarItems={ADMIN_SIDEBAR_ITEMS}>
+    <AdminLayout user={user}>
       <PageHeader
         title="Users"
         description="Manage admin accounts and roles."

@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import { jsPDF } from "jspdf";
 import {
   ArrowRight,
   CheckCircle2,
   Download,
+  FileText,
   Loader2,
   Phone,
 } from "lucide-react";
@@ -14,6 +15,8 @@ import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { useAdminData, usePublished, useTranslatable } from "@/lib/admin/data-provider";
 import { SERVICE_IMAGES } from "@/components/home/ServiceSection";
+import { getServiceCategoryLabel } from "@/lib/admin/serviceCategory";
+import { getFileUrl, revokeFileUrl } from "@/lib/admin/files";
 import type { Service } from "@/lib/admin/types";
 
 function CatalogBody({
@@ -27,10 +30,49 @@ function CatalogBody({
 }) {
   const isRtl = locale === "ar";
   const name = useTranslatable(svc.name, locale);
+  const title = useTranslatable(svc.title ?? svc.name, locale);
+  const subtitle = useTranslatable(svc.subtitle ?? svc.shortDescription, locale);
   const shortDesc = useTranslatable(svc.shortDescription, locale);
   const description = useTranslatable(svc.description, locale);
+  const categoryLabel = getServiceCategoryLabel(
+    svc.category,
+    svc.categoryLocalized,
+    locale,
+  );
   const image = svc.image || SERVICE_IMAGES[svc.slug];
   const [downloading, setDownloading] = useState(false);
+  const [documentUrl, setDocumentUrl] = useState<string | null>(null);
+  const [documentUnavailable, setDocumentUnavailable] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    const linkedDocument = svc.linkedPdf;
+    setDocumentUrl(null);
+    setDocumentUnavailable(false);
+    if (!linkedDocument) return;
+
+    if (/^https?:\/\//i.test(linkedDocument)) {
+      setDocumentUrl(linkedDocument);
+      return;
+    }
+
+    getFileUrl(linkedDocument)
+      .then((url) => {
+        if (cancelled) return;
+        if (url) setDocumentUrl(url);
+        else setDocumentUnavailable(true);
+      })
+      .catch((error: unknown) => {
+        if (cancelled) return;
+        console.error("Failed to load the service document.", error);
+        setDocumentUnavailable(true);
+      });
+
+    return () => {
+      cancelled = true;
+      revokeFileUrl(linkedDocument);
+    };
+  }, [svc.linkedPdf]);
 
   const highlights = svc.highlights.map((h) => (isRtl ? h.ar || h.en : h.en || h.ar));
 
@@ -63,7 +105,7 @@ function CatalogBody({
         }
       }
 
-      const pdfTitle = svc.name.en || name;
+      const pdfTitle = svc.title?.en || svc.name.en || name;
       const pdfBody = svc.description.en || svc.shortDescription.en || description;
       const pdfHighlights = svc.highlights.map((h) => h.en).filter(Boolean);
 
@@ -77,7 +119,7 @@ function CatalogBody({
       doc.setFont("helvetica", "normal");
       doc.setFontSize(11);
       doc.setTextColor(90, 90, 90);
-      doc.text(svc.category, margin, y);
+      doc.text(categoryLabel, margin, y);
       y += 10;
 
       doc.setTextColor(30, 30, 30);
@@ -142,10 +184,10 @@ function CatalogBody({
             {isRtl ? "كتالوج الخدمة" : "Service catalog"}
           </p>
           <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight max-w-3xl">
-            {name}
+            {title}
           </h1>
           <p className="mt-4 text-white/70 max-w-2xl text-base sm:text-lg leading-relaxed">
-            {shortDesc}
+            {subtitle}
           </p>
         </div>
       </section>
@@ -166,7 +208,7 @@ function CatalogBody({
                 </div>
               )}
               <span className="absolute top-4 start-4 px-3 py-1 rounded-full bg-white/90 text-[11px] font-semibold uppercase tracking-wide text-[var(--brand-blue)]">
-                {svc.category}
+                {categoryLabel}
               </span>
             </div>
           </div>
@@ -176,7 +218,7 @@ function CatalogBody({
               {isRtl ? "عن هذه الخدمة" : "About this service"}
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              {description || shortDesc}
+            {description || shortDesc}
             </p>
 
             {highlights.length > 0 && (
@@ -191,6 +233,25 @@ function CatalogBody({
             )}
 
             <div className="mt-auto flex flex-col sm:flex-row flex-wrap gap-3">
+              {documentUrl && (
+                <a
+                  href={documentUrl}
+                  download={!/^https?:\/\//i.test(svc.linkedPdf ?? "")}
+                  target={/^https?:\/\//i.test(svc.linkedPdf ?? "") ? "_blank" : undefined}
+                  rel={/^https?:\/\//i.test(svc.linkedPdf ?? "") ? "noopener noreferrer" : undefined}
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-border text-sm font-medium hover:bg-muted transition-colors"
+                >
+                  <FileText size={16} />
+                  {isRtl ? "تنزيل مستند الخدمة" : "Download service document"}
+                </a>
+              )}
+              {documentUnavailable && (
+                <p className="w-full text-xs text-muted-foreground">
+                  {isRtl
+                    ? "مستند الخدمة غير متاح في هذا المتصفح."
+                    : "The service document is unavailable in this browser."}
+                </p>
+              )}
               <button
                 type="button"
                 onClick={downloadPdf}

@@ -3,15 +3,25 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 interface BilingualFieldProps {
   value: { en: string; ar: string };
   onChange: (field: "en" | "ar", value: string) => void;
   label?: string;
   error?: string;
+  multiline?: boolean;
+  placeholder?: string;
 }
 
-export function BilingualField({ value, onChange, label, error }: BilingualFieldProps) {
+export function BilingualField({
+  value,
+  onChange,
+  label,
+  error,
+  multiline = false,
+  placeholder,
+}: BilingualFieldProps) {
   const [activeLang, setActiveLang] = useState<"en" | "ar">("en");
 
   return (
@@ -19,7 +29,9 @@ export function BilingualField({ value, onChange, label, error }: BilingualField
       {label && <label className="text-sm font-medium text-foreground">{label}</label>}
       <div className="flex gap-1 text-xs">
         <button
+          type="button"
           onClick={() => setActiveLang("en")}
+          aria-pressed={activeLang === "en"}
           className={cn(
             "px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border",
             activeLang === "en"
@@ -30,7 +42,9 @@ export function BilingualField({ value, onChange, label, error }: BilingualField
           EN
         </button>
         <button
+          type="button"
           onClick={() => setActiveLang("ar")}
+          aria-pressed={activeLang === "ar"}
           className={cn(
             "px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border",
             activeLang === "ar"
@@ -41,13 +55,24 @@ export function BilingualField({ value, onChange, label, error }: BilingualField
           AR
         </button>
       </div>
-      <Input
-        value={value[activeLang]}
-        onChange={(e) => onChange(activeLang, e.target.value)}
-        placeholder={activeLang === "en" ? "English…" : "العربية…"}
-        dir={activeLang === "ar" ? "rtl" : "ltr"}
-        className={cn(error ? "border-destructive" : "", "text-left")}
-      />
+      {multiline ? (
+        <Textarea
+          value={value[activeLang]}
+          onChange={(e) => onChange(activeLang, e.target.value)}
+          placeholder={placeholder || (activeLang === "en" ? "English…" : "العربية…")}
+          dir={activeLang === "ar" ? "rtl" : "ltr"}
+          className={cn(error ? "border-destructive" : "", "text-left")}
+          rows={3}
+        />
+      ) : (
+        <Input
+          value={value[activeLang]}
+          onChange={(e) => onChange(activeLang, e.target.value)}
+          placeholder={placeholder || (activeLang === "en" ? "English…" : "العربية…")}
+          dir={activeLang === "ar" ? "rtl" : "ltr"}
+          className={cn(error ? "border-destructive" : "", "text-left")}
+        />
+      )}
       {error && (
         <p className="text-xs text-destructive">{error}</p>
       )}

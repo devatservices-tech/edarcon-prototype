@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useCollection } from "@/hooks/useCollection";
-import { rfqsRepo, equipmentRepo, certificatesRepo, activitiesRepo } from "@/lib/admin/store";
 import type { RFQ, Activity, Equipment, Certificate } from "@/lib/admin/types";
 import {
   ResponsiveContainer,
@@ -12,7 +11,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   LineChart,
   Line,
 } from "recharts";
@@ -31,75 +29,285 @@ import {
 } from "lucide-react";
 
 function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString(undefined, { month: "short", day: "numeric" });
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(iso));
 }
 
-function daysAgo(iso: string): number {
-  return Math.floor((Date.now() - new Date(iso).getTime()) / (1000 * 60 * 60 * 24));
+function sampleTimestamp(daysAgo: number): string {
+  return new Date(Date.now() - daysAgo * 24 * 60 * 60 * 1000).toISOString();
 }
+
+const SAMPLE_RFQS: RFQ[] = [
+  {
+    id: "sample-rfq-1",
+    createdAt: sampleTimestamp(1),
+    updatedAt: sampleTimestamp(1),
+    referenceNo: "RFQ-2026-1042",
+    name: "Ahmed Al-Mansour",
+    email: "ahmed@example.com",
+    phone: "+966 55 123 4567",
+    company: "Gulf Industrial Services",
+    service: "Heat Exchanger Retubing",
+    source: "contact",
+    language: "en",
+    message: { en: "Requesting a quotation for an upcoming maintenance window.", ar: "" },
+    status: "new",
+    timeline: [],
+    notes: [],
+  },
+  {
+    id: "sample-rfq-2",
+    createdAt: sampleTimestamp(2),
+    updatedAt: sampleTimestamp(2),
+    referenceNo: "RFQ-2026-1041",
+    name: "Sarah Khalid",
+    email: "sarah@example.com",
+    phone: "+966 54 234 5678",
+    company: "Eastern Petrochemical Co.",
+    service: "Industrial & Mechanical Services",
+    source: "catalog",
+    language: "en",
+    message: { en: "Please share pricing and availability for mechanical support.", ar: "" },
+    status: "quoted",
+    timeline: [],
+    notes: [],
+  },
+  {
+    id: "sample-rfq-3",
+    createdAt: sampleTimestamp(4),
+    updatedAt: sampleTimestamp(4),
+    referenceNo: "RFQ-2026-1040",
+    name: "Faisal Rahman",
+    email: "faisal@example.com",
+    phone: "+966 50 345 6789",
+    company: "Al Noor Contracting",
+    service: "Equipment Rental",
+    source: "whatsapp",
+    language: "en",
+    message: { en: "Looking for equipment for a short-term site project.", ar: "" },
+    status: "contacted",
+    timeline: [],
+    notes: [],
+  },
+  {
+    id: "sample-rfq-4",
+    createdAt: sampleTimestamp(5),
+    updatedAt: sampleTimestamp(5),
+    referenceNo: "RFQ-2026-1039",
+    name: "Mariam Hassan",
+    email: "mariam@example.com",
+    phone: "+966 56 456 7890",
+    company: "Jubail Plant Operations",
+    service: "Manpower & Operational Support",
+    source: "contact",
+    language: "en",
+    message: { en: "We need certified technicians for a scheduled shutdown.", ar: "" },
+    status: "new",
+    timeline: [],
+    notes: [],
+  },
+  {
+    id: "sample-rfq-5",
+    createdAt: sampleTimestamp(12),
+    updatedAt: sampleTimestamp(12),
+    referenceNo: "RFQ-2026-1038",
+    name: "Omar Nasser",
+    email: "omar@example.com",
+    phone: "+966 53 567 8901",
+    company: "Red Sea Infrastructure",
+    service: "Road Signs Provision & Replacement",
+    source: "chatbot",
+    language: "en",
+    message: { en: "Requesting a proposal for road signage works.", ar: "" },
+    status: "won",
+    timeline: [],
+    notes: [],
+  },
+  {
+    id: "sample-rfq-6",
+    createdAt: sampleTimestamp(18),
+    updatedAt: sampleTimestamp(18),
+    referenceNo: "RFQ-2026-1037",
+    name: "Lina Abdullah",
+    email: "lina@example.com",
+    phone: "+966 58 678 9012",
+    company: "Dammam Facilities Group",
+    service: "Facility Management",
+    source: "contact",
+    language: "en",
+    message: { en: "Please provide details of your ongoing facility services.", ar: "" },
+    status: "quoted",
+    timeline: [],
+    notes: [],
+  },
+];
+
+const SAMPLE_ACTIVITIES: Activity[] = [
+  {
+    id: "sample-activity-1",
+    createdAt: sampleTimestamp(1),
+    updatedAt: sampleTimestamp(1),
+    action: "create",
+    collection: "rfqs",
+    recordId: "sample-rfq-1",
+    recordName: "RFQ-2026-1042",
+    user: "Admin User",
+    details: "New enquiry received from Gulf Industrial Services",
+  },
+  {
+    id: "sample-activity-2",
+    createdAt: sampleTimestamp(2),
+    updatedAt: sampleTimestamp(2),
+    action: "update",
+    collection: "rfqs",
+    recordId: "sample-rfq-2",
+    recordName: "RFQ-2026-1041",
+    user: "Sales Team",
+    details: "Quotation sent to Eastern Petrochemical Co.",
+  },
+  {
+    id: "sample-activity-3",
+    createdAt: sampleTimestamp(3),
+    updatedAt: sampleTimestamp(3),
+    action: "create",
+    collection: "equipment",
+    recordId: "sample-equipment-1",
+    recordName: "Mobile Crane 25T",
+    user: "Admin User",
+    details: "Equipment listing added",
+  },
+  {
+    id: "sample-activity-4",
+    createdAt: sampleTimestamp(5),
+    updatedAt: sampleTimestamp(5),
+    action: "update",
+    collection: "services",
+    recordId: "sample-service-1",
+    recordName: "Industrial & Mechanical Services",
+    user: "Editor",
+    details: "Service information updated",
+  },
+  {
+    id: "sample-activity-5",
+    createdAt: sampleTimestamp(7),
+    updatedAt: sampleTimestamp(7),
+    action: "update",
+    collection: "rfqs",
+    recordId: "sample-rfq-4",
+    recordName: "RFQ-2026-1039",
+    user: "Sales Team",
+    details: "Follow-up scheduled",
+  },
+  {
+    id: "sample-activity-6",
+    createdAt: sampleTimestamp(9),
+    updatedAt: sampleTimestamp(9),
+    action: "create",
+    collection: "certificates",
+    recordId: "sample-certificate-1",
+    recordName: "ISO 9001",
+    user: "Admin User",
+    details: "Certificate record added",
+  },
+];
+
+const SAMPLE_DAILY_COUNTS = [
+  2, 1, 3, 2, 4, 3, 1, 2, 5, 3, 4, 2, 3, 1, 4,
+  5, 2, 3, 4, 2, 6, 3, 4, 2, 5, 3, 4, 6, 3, 5,
+];
 
 export default function DashboardPage() {
+  const [clientReady, setClientReady] = useState(false);
   const [user] = useState<{ name: string; email: string; role: string }>({
     name: "Admin User",
     email: "admin@edarcon.com",
     role: "Super Admin",
   });
 
-  const { data: rfqs, loading: rfqsLoading } = useCollection<RFQ>("rfqs");
-  const { data: equipment, loading: equipLoading } = useCollection<Equipment>("equipment");
-  const {
-    data: certificates,
-    loading: certsLoading,
-  } = useCollection<Certificate>("certificates");
-  const {
-    data: activities,
-    loading: actsLoading,
-  } = useCollection<Activity>("activities");
+  const { data: rfqs } = useCollection<RFQ>("rfqs");
+  const { data: equipment } = useCollection<Equipment>("equipment");
+  const { data: certificates } = useCollection<Certificate>("certificates");
+  const { data: activities } = useCollection<Activity>("activities");
 
   useEffect(() => {
+    setClientReady(true);
     migrateLegacyLeads();
   }, []);
 
-  const loading = rfqsLoading || equipLoading || certsLoading || actsLoading;
+  const dashboardRfqs = rfqs?.length
+    ? rfqs
+    : clientReady
+      ? SAMPLE_RFQS
+      : [];
+  const dashboardActivities = activities?.length
+    ? activities
+    : clientReady
+      ? SAMPLE_ACTIVITIES
+      : [];
 
-  const total = rfqs?.length ?? 0;
+  const total = dashboardRfqs.length;
   const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
-  const newThisWeek = rfqs?.filter(
+  const newThisWeek = dashboardRfqs.filter(
     (r: RFQ) => r.status === "new" && new Date(r.createdAt).getTime() >= weekAgo
   ).length;
-  const quoted = rfqs?.filter((r: RFQ) => r.status === "quoted").length ?? 0;
-  const won = rfqs?.filter((r: RFQ) => r.status === "won").length ?? 0;
+  const quoted = dashboardRfqs.filter((r: RFQ) => r.status === "quoted").length;
+  const won = dashboardRfqs.filter((r: RFQ) => r.status === "won").length;
 
-  const recent = (rfqs ?? [])
+  const recent = dashboardRfqs
     .slice()
     .sort((a: RFQ, b: RFQ) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, 5);
 
-  const recentActivities = (activities ?? [])
+  const recentActivities = dashboardActivities
     .slice()
     .sort((a: Activity, b: Activity) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, 6);
 
-  const publishedEquip = equipment?.filter((e: Equipment) => e.status === "published").length ?? 0;
-  const totalEquip = equipment?.length ?? 0;
+  const publishedEquip = equipment?.length
+    ? equipment.filter((e: Equipment) => e.status === "published").length
+    : clientReady
+      ? 18
+      : 0;
+  const totalEquip = equipment?.length
+    ? equipment.length
+    : clientReady
+      ? 24
+      : 0;
 
   const now = Date.now();
   const thirtyDays = 30 * 24 * 60 * 60 * 1000;
-  const expiring = certificates?.filter(
-    (c: Certificate) => new Date(c.expiryDate).getTime() - now <= thirtyDays && new Date(c.expiryDate).getTime() > now
-  ).length;
+  const expiring = certificates?.length
+    ? certificates.filter(
+        (c: Certificate) =>
+          new Date(c.expiryDate).getTime() - now <= thirtyDays &&
+          new Date(c.expiryDate).getTime() > now,
+      ).length
+    : clientReady
+      ? 2
+      : 0;
 
   const serviceCounts: Record<string, number> = {};
-  for (const r of rfqs ?? []) serviceCounts[r.service] = (serviceCounts[r.service] ?? 0) + 1;
+  for (const r of dashboardRfqs) serviceCounts[r.service] = (serviceCounts[r.service] ?? 0) + 1;
   const barData = Object.entries(serviceCounts).map(([name, value]) => ({ name, value }));
 
   const daily: Record<string, number> = {};
-  for (const r of rfqs ?? []) {
+  for (const r of dashboardRfqs) {
     const d = new Date(r.createdAt).toISOString().slice(0, 10);
     daily[d] = (daily[d] ?? 0) + 1;
   }
   const dates = Object.keys(daily).sort().slice(-30);
-  const lineData = dates.map((d) => ({ date: d, value: daily[d] }));
+  const lineData = rfqs?.length
+    ? dates.map((d) => ({ date: d, value: daily[d] }))
+    : clientReady
+      ? SAMPLE_DAILY_COUNTS.map((value, index) => {
+        const date = new Date();
+        date.setDate(date.getDate() - (SAMPLE_DAILY_COUNTS.length - index - 1));
+        return { date: date.toISOString().slice(0, 10), value };
+        })
+      : [];
 
   const getStringValue = (value: string | { en: string; ar: string } | undefined): string => {
     if (!value) return "";
@@ -149,7 +357,7 @@ export default function DashboardPage() {
             <ResponsiveContainer minWidth={300} minHeight={300}>
               <LineChart data={lineData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="date" tick={{ fontSize: 11 }} interval={0} />
+                <XAxis dataKey="date" tick={{ fontSize: 11 }} interval="preserveStartEnd" />
                 <YAxis tick={{ fontSize: 11 }} width={40} />
                 <Tooltip />
                 <Line type="monotone" dataKey="value" stroke="#1F5A99" strokeWidth={2} />
@@ -246,7 +454,7 @@ export default function DashboardPage() {
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-semibold text-foreground">Activity feed</h3>
         </div>
-        {loading || recentActivities.length === 0 ? (
+        {recentActivities.length === 0 ? (
           <p className="text-sm text-muted-foreground">No recent activity.</p>
         ) : (
           <div className="space-y-3">

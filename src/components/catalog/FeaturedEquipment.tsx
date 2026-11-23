@@ -4,7 +4,9 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import { type CatalogProduct } from "@/data/catalog";
+import { getEquipmentImage } from "@/data/equipmentImages";
 
 interface EnrichedProduct extends CatalogProduct {
   name: string;
@@ -30,7 +32,7 @@ export function FeaturedEquipment({
   const t = useTranslations("catalog");
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-muted/40 border-y border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
           <div>
@@ -40,7 +42,7 @@ export function FeaturedEquipment({
             <p className="text-muted-foreground">{subtitle}</p>
           </div>
           <Link
-            href="/catalog"
+            href="/equipment"
             className="inline-flex items-center gap-2 text-sm font-medium text-[var(--brand-blue)] dark:text-[var(--brand-orange)] hover:text-[var(--brand-orange)] dark:hover:text-[var(--brand-blue)] transition-colors"
           >
             {viewAllLabel}
@@ -49,15 +51,19 @@ export function FeaturedEquipment({
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {featured.map((product) => (
+          {featured.map((product, index) => (
             <div
               key={product.id}
-              className="flex flex-col rounded-2xl border border-border bg-card overflow-hidden p-4 transition-all hover:shadow-xl hover:-translate-y-1 duration-300"
+              className="group flex flex-col rounded-2xl border border-border bg-card overflow-hidden p-4 transition-all hover:shadow-xl hover:-translate-y-1 duration-300"
             >
-              <div className="h-32 overflow-hidden mb-3 bg-blueprint opacity-20 flex items-center justify-center">
-                <div className="w-10 h-10 rounded bg-[var(--brand-orange)]/20 text-[var(--brand-blue)] flex items-center justify-center text-[12px]">
-                  🏗️
-                </div>
+              <div className="relative h-36 overflow-hidden mb-3 rounded-xl bg-muted">
+                <Image
+                  src={getEquipmentImage(product.category, index)}
+                  alt={product.name}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
               </div>
               <Link
                 href={`/catalog/${product.slug}`}

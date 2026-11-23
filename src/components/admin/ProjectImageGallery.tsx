@@ -149,6 +149,7 @@ export function ProjectImageGallery({
               Gallery ({items.length})
             </span>
             <button
+              type="button"
               onClick={() => inputRef.current?.click()}
               className="text-xs text-brand-blue hover:text-brand-blue-dark underline"
             >
@@ -177,6 +178,7 @@ export function ProjectImageGallery({
                   <div className="absolute top-2 left-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                     {!isCover && (
                       <button
+                        type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           setCover(item.id);
@@ -188,6 +190,7 @@ export function ProjectImageGallery({
                       </button>
                     )}
                     <button
+                      type="button"
                       onClick={(e) => {
                         e.stopPropagation();
                         removeImage(item.id);
@@ -201,6 +204,7 @@ export function ProjectImageGallery({
                   <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                     {items.indexOf(item) > 0 && (
                       <button
+                        type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           moveImage(item.id, "up");
@@ -213,6 +217,7 @@ export function ProjectImageGallery({
                     )}
                     {items.indexOf(item) < items.length - 1 && (
                       <button
+                        type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           moveImage(item.id, "down");
@@ -248,6 +253,7 @@ export function ProjectImageGallery({
           <p className="text-sm text-muted-foreground">Drag & drop images or click to upload</p>
           <p className="text-xs text-muted-foreground">Max {maxSizeMB} MB per image</p>
           <button
+            type="button"
             onClick={() => inputRef.current?.click()}
             className="mt-3 text-xs font-medium text-brand-blue hover:text-brand-blue-dark underline"
           >

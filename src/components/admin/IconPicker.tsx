@@ -50,7 +50,13 @@ const ICON_NAMES: string[] = [
   "RefreshCw", "RefreshCcw", "History", "Undo", "Redo", "Trash", "Trash2",
   "TrashX", "Delete", "Archive", "ArchiveRestore", "SaveAll", "SaveAs", "Copy",
   "CopyCheck", "Paste", "Cut",
-].filter((name) => typeof lucide[name as keyof typeof lucide] === "function");
+].filter((name) => {
+  const component = lucide[name as keyof typeof lucide];
+  return (
+    typeof component === "function" ||
+    (typeof component === "object" && component !== null && "$$typeof" in component)
+  );
+});
 
 interface IconPickerProps {
   value: string;
@@ -68,6 +74,7 @@ export function IconPicker({ value, onChange }: IconPickerProps) {
   return (
     <div className="relative inline-block">
       <button
+        type="button"
         onClick={() => setOpen(!open)}
         className={cn(
           "flex items-center gap-2 w-full px-3 py-2 rounded-lg border border-input bg-background text-left hover:bg-muted transition-colors",
@@ -92,6 +99,7 @@ export function IconPicker({ value, onChange }: IconPickerProps) {
             {filteredIcons.map((name) => (
               <button
                 key={name}
+                type="button"
                 onClick={() => {
                   onChange(name);
                   setOpen(false);
@@ -116,7 +124,14 @@ export function IconPicker({ value, onChange }: IconPickerProps) {
 }
 
 function getIconElement(name: string): React.ReactElement | null {
-  const Comp = (lucide as any)[name];
-  if (!Comp || typeof Comp !== "function") return null;
+  const component = lucide[name as keyof typeof lucide];
+  if (
+    !component ||
+    (typeof component !== "function" &&
+      (typeof component !== "object" || !("$$typeof" in component)))
+  ) {
+    return null;
+  }
+  const Comp = component as React.ElementType;
   return React.createElement(Comp, { className: "w-4 h-4" });
 }

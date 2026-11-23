@@ -35,6 +35,9 @@ export default async function EquipmentPage({
     vehicles:   locale === "ar" ? "المركبات"    : "Vehicles",
   };
   const allLabel = locale === "ar" ? "الكل" : "All";
+  const categoriesHeading =
+    locale === "ar" ? "فئات المعدات" : "Equipment categories";
+  const itemCountLabel = locale === "ar" ? "معدات" : "items";
 
   return (
     <>
@@ -46,9 +49,12 @@ export default async function EquipmentPage({
 
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <RevealOnScroll>
-            <EquipmentGrid labels={catLabels} allLabel={allLabel} />
-          </RevealOnScroll>
+          <EquipmentGrid
+            labels={catLabels}
+            allLabel={allLabel}
+            categoriesHeading={categoriesHeading}
+            itemCountLabel={itemCountLabel}
+          />
         </div>
       </section>
 

@@ -443,123 +443,147 @@ export default function RfqPage() {
       </div>
 
       <Sheet open={drawerOpen} onOpenChange={setDrawerOpen}>
-        <SheetContent side="right" className="w-full sm:w-[560px]">
-          <SheetHeader>
-            <SheetTitle>{item ? item.referenceNo : ""}</SheetTitle>
+        <SheetContent
+          side="right"
+          className="!w-full h-dvh max-h-dvh gap-0 overflow-hidden p-0 sm:!w-[46rem] sm:!max-w-[calc(100vw-2rem)]"
+        >
+          <SheetHeader className="shrink-0 border-b border-border bg-background px-6 py-5 pr-14">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-blue">
+              RFQ Management
+            </p>
+            <SheetTitle className="text-xl">{item ? item.referenceNo : ""}</SheetTitle>
             <SheetDescription>
-              {item ? `${item.name} — ${item.company}` : ""}
+              {item ? `${item.name} · ${item.company}` : ""}
             </SheetDescription>
           </SheetHeader>
-          <div className="p-6 space-y-5">
+          <div className="min-h-0 flex-1 space-y-5 overflow-y-auto px-5 py-5 sm:px-7">
             {item && (
               <>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-border bg-card p-4 shadow-sm">
                   <StatusBadge status={item.status} />
-                  <span className="ml-auto text-xs text-muted-foreground uppercase tracking-wider">
+                  <span className="ml-auto rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">
                     {item.language.toUpperCase()}
                   </span>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <section className="space-y-4 rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-5">
                   <div>
-                    <label className="text-xs font-medium text-muted-foreground">Contact</label>
-                    <p className="text-sm text-foreground">{item.name}</p>
-                    <p className="text-xs text-muted-foreground">{item.email}</p>
+                    <h3 className="font-semibold text-foreground">Contact information</h3>
+                    <p className="text-sm text-muted-foreground">Details provided with this enquiry.</p>
+                  </div>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="min-w-0">
+                      <label className="mb-1 block text-xs font-medium text-muted-foreground">Name</label>
+                      <p className="break-words text-sm text-foreground">{item.name}</p>
+                    </div>
+                    <div className="min-w-0">
+                      <label className="mb-1 block text-xs font-medium text-muted-foreground">Phone</label>
+                      <a href={`tel:${item.phone}`} className="break-words text-sm text-brand-blue hover:underline">
+                        {item.phone}
+                      </a>
+                    </div>
+                    <div className="min-w-0">
+                      <label className="mb-1 block text-xs font-medium text-muted-foreground">Email</label>
+                      <a href={`mailto:${item.email}`} className="break-all text-sm text-brand-blue hover:underline">
+                        {item.email}
+                      </a>
+                    </div>
+                    <div className="min-w-0">
+                      <label className="mb-1 block text-xs font-medium text-muted-foreground">WhatsApp</label>
+                      <a
+                        href={`https://wa.me/${item.phone.replace(/\D/g, "")}?text=${encodeURIComponent(`Hello Edarcon, following up on ${item.referenceNo}`)}`}
+                        target="_blank"
+                        rel="noopener"
+                        className="inline-flex items-center gap-2 text-sm text-brand-blue hover:underline"
+                      >
+                        <WhatsAppIcon className="h-4 w-4" /> Message
+                      </a>
+                    </div>
+                  </div>
+                </section>
+
+                <section className="space-y-4 rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-5">
+                  <div>
+                    <h3 className="font-semibold text-foreground">Enquiry details</h3>
+                    <p className="text-sm text-muted-foreground">Requested service and message.</p>
                   </div>
                   <div>
-                    <label className="text-xs font-medium text-muted-foreground">Phone</label>
-                    <a
-                      href={`tel:${item.phone}`}
-                      className="text-sm text-brand-blue hover:underline"
-                    >
-                      {item.phone}
-                    </a>
-                  </div>
-                  <div>
-                    <label className="text-xs font-medium text-muted-foreground">Email</label>
-                    <a
-                      href={`mailto:${item.email}`}
-                      className="text-sm text-brand-blue hover:underline"
-                    >
-                      {item.email}
-                    </a>
-                  </div>
-                  <div>
-                    <label className="text-xs font-medium text-muted-foreground">WhatsApp</label>
-                    <a
-                      href={`https://wa.me/${item.phone.replace(/\D/g, "")}?text=${encodeURIComponent(`Hello Edarcon, following up on ${item.referenceNo}`)}`}
-                      target="_blank"
-                      rel="noopener"
-                      className="inline-flex items-center gap-2 text-sm text-brand-blue hover:underline"
-                    >
-                      <WhatsAppIcon className="w-4 h-4" /> Message
-                    </a>
-                  </div>
-                  <div className="col-span-2">
-                    <label className="text-xs font-medium text-muted-foreground">Service</label>
+                    <label className="mb-1 block text-xs font-medium text-muted-foreground">Service</label>
                     <p className="text-sm text-foreground">{item.service}</p>
                   </div>
                   <div>
-                    <label className="text-xs font-medium text-muted-foreground">Assigned to</label>
-                    <Select
-                      value={item.assignedTo ?? ""}
-                      onValueChange={(v) => assignTo(item.id, v as string)}
-                    >
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select user…" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {ADMIN_USERS.map((u) => (
-                          <SelectItem key={u.email} value={u.email}>{u.label}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <label className="mb-1 block text-xs font-medium text-muted-foreground">Message</label>
+                    <p className="whitespace-pre-wrap break-words text-sm text-foreground">
+                      {item.message.en || item.message.ar}
+                    </p>
                   </div>
+                </section>
+
+                <section className="space-y-4 rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-5">
                   <div>
-                    <label className="text-xs font-medium text-muted-foreground">Follow-up date</label>
-                    <Input
-                      type="date"
-                      value={item.followUpDate ?? ""}
-                      onChange={(e) => setFollowUp(item.id, e.target.value)}
-                    />
+                    <h3 className="font-semibold text-foreground">Follow-up</h3>
+                    <p className="text-sm text-muted-foreground">Assign an owner and set a follow-up date.</p>
                   </div>
-                </div>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-medium text-muted-foreground">Assigned to</label>
+                      <Select
+                        value={item.assignedTo ?? ""}
+                        onValueChange={(v) => assignTo(item.id, v as string)}
+                      >
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select user…" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {ADMIN_USERS.map((u) => (
+                            <SelectItem key={u.email} value={u.email}>{u.label}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-medium text-muted-foreground">Follow-up date</label>
+                      <Input
+                        type="date"
+                        value={item.followUpDate ?? ""}
+                        onChange={(e) => setFollowUp(item.id, e.target.value)}
+                      />
+                    </div>
+                  </div>
+                </section>
 
-                <div>
-                  <label className="text-xs font-medium text-muted-foreground block mb-1">Details</label>
-                  <p className="text-sm text-foreground whitespace-pre-wrap break-words">
-                    {item.message.en || item.message.ar}
-                  </p>
-                </div>
-
-                <div>
-                  <label className="text-xs font-medium text-muted-foreground block mb-2">Status timeline</label>
-                  <div className="space-y-2">
+                <section className="space-y-4 rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-5">
+                  <div>
+                    <h3 className="font-semibold text-foreground">Status timeline</h3>
+                    <p className="text-sm text-muted-foreground">Recent activity for this enquiry.</p>
+                  </div>
+                  <div className="space-y-4">
                     {item.timeline.slice().reverse().map((t) => (
-                      <div key={t.id} className="flex items-start gap-2 text-xs">
-                        <div className="w-1.5 h-1.5 rounded-full bg-brand-blue mt-0.5 shrink-0" />
-                        <div className="flex-1">
-                          <p className="text-foreground">
+                      <div key={t.id} className="flex items-start gap-3 text-sm">
+                        <div className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand-blue" />
+                        <div className="min-w-0 flex-1">
+                          <p className="break-words text-foreground">
                             <span className="font-medium">{STATUS_LABELS[t.status]}</span>
                             {t.note ? ` — ${t.note}` : ""}
                           </p>
-                          <p className="text-muted-foreground">
-                            {t.changedBy} • {new Date(t.changedAt).toLocaleString()}
+                          <p className="mt-1 text-xs text-muted-foreground">
+                            {t.changedBy} · {new Date(t.changedAt).toLocaleString()}
                           </p>
                         </div>
                       </div>
                     ))}
                   </div>
-                </div>
+                </section>
 
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <label className="text-xs font-medium text-muted-foreground">Internal notes</label>
+                <section className="space-y-4 rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-5">
+                  <div>
+                    <h3 className="font-semibold text-foreground">Internal notes</h3>
+                    <p className="text-sm text-muted-foreground">Notes are visible to admins only.</p>
                   </div>
                   <div className="space-y-2">
                     {item.notes.map((n) => (
-                      <div key={n.id} className="p-3 rounded-lg border border-border/50 bg-muted/30 mb-2">
+                      <div key={n.id} className="rounded-xl border border-border bg-muted/30 p-3">
                         <p className="text-xs font-medium text-foreground">{n.author}</p>
-                        <p className="text-sm text-foreground">{n.content}</p>
+                        <p className="mt-1 whitespace-pre-wrap break-words text-sm text-foreground">{n.content}</p>
                         <p className="text-[10px] text-muted-foreground mt-1">
                           {new Date(n.createdAt).toLocaleString()}
                         </p>
@@ -580,32 +604,27 @@ export default function RfqPage() {
                         form.reset();
                       }
                     }}
-                    className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3"
+                    className="grid gap-3 sm:grid-cols-[1fr_2fr_auto]"
                   >
                     <Input
                       name="author"
                       placeholder="Your name"
                       defaultValue="admin"
-                      className="h-8"
                     />
                     <Textarea
                       name="content"
                       placeholder="Add a note…"
-                      rows={2}
-                      className="h-12 sm:h-auto"
+                      rows={3}
                     />
-                    <button
-                      type="submit"
-                      className="col-span-2 sm:col-auto px-3 py-2 bg-brand-blue text-white rounded text-sm font-medium hover:bg-brand-blue-dark"
-                    >
+                    <Button type="submit" className="sm:self-start">
                       Save note
-                    </button>
+                    </Button>
                   </form>
-                </div>
+                </section>
               </>
             )}
           </div>
-          <SheetFooter>
+          <SheetFooter className="mt-0 shrink-0 flex-row justify-end border-t border-border bg-background px-5 py-4 sm:px-7">
             <Button variant="outline" onClick={() => setDrawerOpen(false)}>
               Close
             </Button>

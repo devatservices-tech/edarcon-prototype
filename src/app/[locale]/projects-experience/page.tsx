@@ -235,7 +235,7 @@ export default function ProjectsPage({
                 <RevealOnScroll key={cat.key} direction="up">
                     <a
                       href="#case-studies"
-                      className="group relative rounded-2xl overflow-hidden border border-border h-48 hover:border-[var(--brand-blue)]/40 transition-all"
+                      className="group relative block h-48 w-full min-w-0 rounded-2xl overflow-hidden border border-border hover:border-[var(--brand-blue)]/40 transition-all"
                     >
                     <Image
                       src={cat.image}
@@ -245,10 +245,10 @@ export default function ProjectsPage({
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
-                    <div className="absolute bottom-0 left-0 right-0 p-5">
-                      <div className="flex items-center gap-2">
+                    <div className="absolute inset-x-0 bottom-0 p-5 bg-card/95 border-t border-border">
+                      <div className="flex min-w-0 items-center gap-2">
                         <Icon size={18} strokeWidth={1.5} className="text-[var(--brand-orange)]" />
-                        <h3 className="font-bold text-white text-sm leading-snug">{t(cat.labelKey)}</h3>
+                        <h3 className="min-w-0 break-words font-bold text-foreground text-sm leading-snug">{t(cat.labelKey)}</h3>
                       </div>
                     </div>
                   </a>

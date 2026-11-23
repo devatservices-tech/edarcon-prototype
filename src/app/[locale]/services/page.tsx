@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import PageHero from "@/components/PageHero";
 import { ServiceSection } from "@/components/home/ServiceSection";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { useAdminData, usePublished, useOrdered } from "@/lib/admin/data-provider";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, LayoutGrid } from "lucide-react";
 
 const CATEGORY_ORDER = [
   "Industrial & Mechanical Services",
@@ -24,6 +25,7 @@ export default function ServicesPage({
   params: Promise<{ locale: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  const t = useTranslations("services");
   const [locale, setLocale] = useState<string>("en");
   const [isRtl, setIsRtl] = useState<boolean>(false);
 
@@ -37,6 +39,8 @@ export default function ServicesPage({
   const { services, loading } = useAdminData();
   const published = usePublished(services ?? []);
   const ordered = useOrdered(published);
+  const [activeCategory, setActiveCategory] =
+    useState<(typeof CATEGORY_ORDER)[number]>(CATEGORY_ORDER[0]);
 
   const byCategory = CATEGORY_ORDER.reduce<Record<string, typeof ordered>>(
     (acc, cat) => {
@@ -73,12 +77,26 @@ export default function ServicesPage({
     return isRtl ? (l.ar || l.en) : (l.en || l.ar);
   };
 
+  const availableCategories = CATEGORY_ORDER.filter(
+    (cat) => byCategory[cat].length > 0,
+  );
+  const activeItems = byCategory[activeCategory] ?? [];
+
+  useEffect(() => {
+    if (
+      availableCategories.length > 0 &&
+      !availableCategories.includes(activeCategory)
+    ) {
+      setActiveCategory(availableCategories[0]);
+    }
+  }, [availableCategories, activeCategory]);
+
   return (
     <>
       <PageHero
-        eyebrow={loading ? "Services" : ""}
-        title={loading ? "Our Services" : ""}
-        subtitle=""
+        eyebrow={t("pageEyebrow")}
+        title={t("pageTitle")}
+        subtitle={t("pageSubtitle")}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
@@ -89,43 +107,67 @@ export default function ServicesPage({
             ))}
           </div>
         ) : (
-          CATEGORY_ORDER.map((cat) => {
-            const items = byCategory[cat];
-            if (items.length === 0) return null;
-            return (
-              <section
-                key={cat}
-                id={cat.replace(/[^a-z0-9]/gi, "-").toLowerCase()}
-                className="scroll-mt-24 mb-20"
-              >
-                <RevealOnScroll className="mb-6">
-                  <div className="flex items-end gap-4 mb-8">
-                    <div className="w-10 h-10 rounded-2xl bg-[var(--brand-blue)]/10 dark:bg-[var(--brand-blue)]/20 flex items-center justify-center">
-                      <ArrowRight size={20} className="text-[var(--brand-orange)]" />
-                    </div>
-                    <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
-                      {categoryName(cat)}
-                    </h2>
-                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full border border-border/50 bg-muted/50 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                      {items.length} Services
-                    </span>
-                  </div>
-                </RevealOnScroll>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {items.map((svc, i) => (
-                    <ServiceSection
-                      key={svc.id}
-                      svc={svc}
-                      locale={locale}
-                      isRtl={isRtl}
-                      index={i}
-                    />
-                  ))}
+          <div className="grid lg:grid-cols-[280px_minmax(0,1fr)] gap-8 lg:gap-10 items-start">
+            <aside className="lg:sticky lg:top-24">
+              <div className="rounded-2xl border border-border bg-card p-3 shadow-sm">
+                <div className="hidden lg:flex items-center gap-2 px-3 py-2 mb-2 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                  <LayoutGrid size={15} className="text-[var(--brand-orange)]" />
+                  {isRtl ? "فئات الخدمات" : "Service Categories"}
                 </div>
-              </section>
-            );
-          })
+                <nav className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-1 lg:pb-0" aria-label="Service categories">
+                  {availableCategories.map((cat) => {
+                    const isActive = cat === activeCategory;
+                    return (
+                      <button
+                        key={cat}
+                        type="button"
+                        onClick={() => setActiveCategory(cat)}
+                        className={cn(
+                          "min-w-max lg:min-w-0 lg:w-full text-start rounded-xl px-4 py-3 text-sm font-semibold transition-all border",
+                          isActive
+                            ? "bg-[var(--brand-blue)] border-[var(--brand-blue)] text-white shadow-md"
+                            : "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted",
+                        )}
+                        aria-current={isActive ? "page" : undefined}
+                      >
+                        {categoryName(cat)}
+                        <span className={cn("block lg:inline lg:ms-2 text-xs mt-1 lg:mt-0", isActive ? "text-white/70" : "text-muted-foreground")}>
+                          {byCategory[cat].length}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </nav>
+              </div>
+            </aside>
+
+            <section className="min-w-0">
+              <RevealOnScroll className="mb-6">
+                <div className="flex items-end gap-3 mb-8">
+                  <div className="w-10 h-10 shrink-0 rounded-2xl bg-[var(--brand-blue)]/10 dark:bg-[var(--brand-blue)]/20 flex items-center justify-center">
+                    <ArrowRight size={20} className={cn("text-[var(--brand-orange)]", isRtl && "rotate-180")} />
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
+                    {categoryName(activeCategory)}
+                  </h2>
+                  <span className="hidden sm:inline-flex items-center px-3 py-1 rounded-full border border-border/50 bg-muted/50 text-xs font-medium text-muted-foreground">
+                    {activeItems.length} {isRtl ? "خدمات" : "Services"}
+                  </span>
+                </div>
+              </RevealOnScroll>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {activeItems.map((svc, i) => (
+                  <ServiceSection
+                    key={svc.id}
+                    svc={svc}
+                    locale={locale}
+                    isRtl={isRtl}
+                    index={i}
+                  />
+                ))}
+              </div>
+            </section>
+          </div>
         )}
       </div>
 

@@ -45,7 +45,7 @@ export default function ServicesSection({ locale }: { locale: string }) {
               <div key={key} className="animate-pulse bg-muted rounded-2xl h-64" />
             ))
           ) : (
-            ordered.map((svc, i) => (
+            ordered.slice(0, 8).map((svc, i) => (
               <ServiceSection
                 key={svc.id}
                 svc={svc}

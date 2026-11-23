@@ -4,13 +4,15 @@ import { cn } from "@/lib/utils";
 import {
   HardHat, Shovel, Droplets, Building2,
   Construction, Truck, Users, Settings,
-  ArrowRight, BookOpen, Thermometer, Wrench, Zap,
+  ArrowRight, Thermometer, Wrench, Zap,
   Scissors, Gauge, Package, Signpost,
 } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import { Link } from "@/i18n/navigation";
 import { useTranslatable } from "@/lib/admin/data-provider";
+import { getServiceCategoryLabel } from "@/lib/admin/serviceCategory";
+import type { Service } from "@/lib/admin/types";
 
 const SERVICE_ICONS: Record<string, LucideIcon> = {
   projectSupport: HardHat,
@@ -59,7 +61,7 @@ export const SERVICE_IMAGES: Record<string, string> = {
 };
 
 interface ServiceSectionProps {
-  svc: { id: string; slug: string; name: { en: string; ar: string }; shortDescription: { en: string; ar: string }; highlights: { en: string; ar: string }[]; status: "published" | "draft"; active: boolean; order: number; category: string; image?: string };
+  svc: Service;
   locale: string;
   isRtl: boolean;
   index: number;
@@ -68,6 +70,11 @@ interface ServiceSectionProps {
 export function ServiceSection({ svc, locale, isRtl, index }: ServiceSectionProps) {
   const name = useTranslatable(svc.name, locale as "en" | "ar");
   const shortDesc = useTranslatable(svc.shortDescription, locale as "en" | "ar");
+  const categoryLabel = getServiceCategoryLabel(
+    svc.category,
+    svc.categoryLocalized,
+    locale,
+  );
 
   const Icon = SERVICE_ICONS[svc.slug as keyof typeof SERVICE_ICONS] || HardHat;
   const image = svc.image ?? SERVICE_IMAGES[svc.slug];
@@ -77,12 +84,12 @@ export function ServiceSection({ svc, locale, isRtl, index }: ServiceSectionProp
       key={svc.id}
       id={svc.slug}
       className={cn(
-        "group relative rounded-2xl border border-border bg-card overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1",
+        "group relative flex h-full flex-col rounded-2xl border border-border bg-card overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1",
         index % 2 === 0 && "bg-muted/30",
       )}
       aria-label={name}
     >
-      <RevealOnScroll direction="up" amount={0.1}>
+      <RevealOnScroll direction="up" amount={0.1} className="flex flex-1 flex-col">
         <div className="relative h-48 overflow-hidden">
           {image ? (
             <img
@@ -103,11 +110,11 @@ export function ServiceSection({ svc, locale, isRtl, index }: ServiceSectionProp
           </div>
         </div>
 
-        <div className="p-6">
+        <div className="flex flex-1 flex-col p-6">
           <div className="flex items-center gap-2 mb-2">
             <Icon size={16} strokeWidth={1.5} className="text-[var(--brand-orange)]" />
             <span className="text-xs font-medium text-[var(--brand-blue)] uppercase tracking-tighter">
-              {svc.category}
+              {categoryLabel}
             </span>
           </div>
           <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 leading-tight group-hover:text-[var(--brand-blue)] transition-colors">
@@ -116,20 +123,13 @@ export function ServiceSection({ svc, locale, isRtl, index }: ServiceSectionProp
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
             {shortDesc}
           </p>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="mt-auto">
             <Link
               href={`/services/${svc.slug}`}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--brand-blue)] text-white text-sm font-semibold hover:bg-[var(--brand-blue-dark)] transition-colors"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
             >
-              <BookOpen size={14} />
-              {isRtl ? "عرض الكتالوج" : "See Catalog"}
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-blue)] hover:gap-3 transition-all"
-            >
-              {isRtl ? "اطلب عرض سعر" : "Get a Quote"}
-              <ArrowRight size={13} className={cn(isRtl && "rotate-180")} />
+              {isRtl ? "عرض التفاصيل" : "View Details"}
+              <ArrowRight size={14} className={cn(isRtl && "rotate-180")} />
             </Link>
           </div>
         </div>
