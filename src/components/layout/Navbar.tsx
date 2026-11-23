@@ -13,7 +13,6 @@ const NAV_LINKS = [
   { key: "home",      href: "/"          },
   { key: "services",  href: "/services"  },
   { key: "equipment", href: "/equipment" },
-  { key: "catalog",   href: "/catalog"   },
   { key: "about",     href: "/about"     },
   { key: "qualityHse",href: "/quality-hse" },
   { key: "projects",  href: "/projects-experience" },

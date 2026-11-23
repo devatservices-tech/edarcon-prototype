@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import {
   HardHat, Shovel, Droplets, Building2,
   Construction, Truck, Users, Settings,
-  ArrowRight, Thermometer, Wrench, Zap,
+  ArrowRight, BookOpen, Thermometer, Wrench, Zap,
   Scissors, Gauge, Package, Signpost,
 } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
@@ -39,7 +39,7 @@ const SERVICE_ICONS: Record<string, LucideIcon> = {
   "road-signs-provision-replacement": Signpost,
 };
 
-const SERVICE_IMAGES: Record<string, string> = {
+export const SERVICE_IMAGES: Record<string, string> = {
   "flange-facing-machining": "/images/services/01. Industrial & Mechanical Services/Flange Facing & Machining.jpeg",
   "post-heat-treatment-pwht": "/images/services/01. Industrial & Mechanical Services/Post Heat Treatment (PWHT).jpeg",
   "bolt-torquing-tensioning": "/images/services/01. Industrial & Mechanical Services/Bolt Torquing & Tensioning.jpeg",
@@ -116,13 +116,22 @@ export function ServiceSection({ svc, locale, isRtl, index }: ServiceSectionProp
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
             {shortDesc}
           </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-blue)] hover:gap-3 transition-all"
-          >
-            Get a Quote
-            <ArrowRight size={13} className={cn(isRtl && "rotate-180")} />
-          </Link>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href={`/services/${svc.slug}`}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--brand-blue)] text-white text-sm font-semibold hover:bg-[var(--brand-blue-dark)] transition-colors"
+            >
+              <BookOpen size={14} />
+              {isRtl ? "عرض الكتالوج" : "See Catalog"}
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-blue)] hover:gap-3 transition-all"
+            >
+              {isRtl ? "اطلب عرض سعر" : "Get a Quote"}
+              <ArrowRight size={13} className={cn(isRtl && "rotate-180")} />
+            </Link>
+          </div>
         </div>
       </RevealOnScroll>
     </article>
