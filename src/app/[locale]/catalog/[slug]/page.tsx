@@ -11,6 +11,8 @@ import {
   getProductBySlug,
   type CatalogProduct,
 } from "@/data/catalog";
+import { AddToEnquiryButton } from "@/components/catalog/AddToEnquiryButton";
+import { CatalogPdfDownload } from "@/components/catalog/CatalogPdfDownload";
 
 type TFunc = (key: string) => unknown;
 import { cn } from "@/lib/utils";
@@ -66,8 +68,8 @@ function enrichProduct(
     name: tStr(t, `${base}.name`, product.id),
     shortDescription: tStr(t, `${base}.shortDescription`, ""),
     description: tStr(t, `${base}.description`, ""),
-    features: [],
-    applications: [],
+    features: product.features,
+    applications: product.applications,
     specs,
     categoryLabel: categoryLabels[product.category] || product.category,
   };
@@ -329,12 +331,7 @@ export default async function CatalogDetailPage({
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3">
-                <button
-                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[var(--brand-orange)] text-[var(--navy)] font-bold text-sm hover:bg-[var(--brand-orange-dark)] transition-colors shadow-lg"
-                  onClick={() => {}}
-                >
-                  {tStr(t as TFunc, "addToEnquiry", "Add to Enquiry")}
-                </button>
+                <AddToEnquiryButton productId={enriched.id} />
                 <div className="flex-1 sm:flex-none sm:w-auto">
                   <a
                     href="tel:+966559021988"
@@ -355,6 +352,15 @@ export default async function CatalogDetailPage({
                     {tStr(t as TFunc, "whatsapp", "WhatsApp")}
                   </a>
                 </div>
+                <CatalogPdfDownload
+                  name={enriched.name}
+                  categoryLabel={enriched.categoryLabel}
+                  availabilityLabel={availabilityLabel}
+                  description={enriched.description}
+                  features={enriched.features}
+                  applications={enriched.applications}
+                  specs={enriched.specs}
+                />
               </div>
             </div>
           </div>

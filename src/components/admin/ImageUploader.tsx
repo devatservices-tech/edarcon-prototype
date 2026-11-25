@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { Plus, RefreshCw, Trash2, Image as ImageIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { saveFile, getFileUrl, removeFile, revokeFileUrl, type StoredFile } from "@/lib/admin/files";
 
@@ -100,13 +100,19 @@ export function ImageUploader({ value, onChange, accept = "image/*", maxSizeMB =
       {file ? (
         <div className="relative flex flex-col items-center gap-3">
           {previewUrl && (
-            <img
+            <div className="relative h-32 w-32">
+              <Image
               src={previewUrl}
               alt="preview"
-              className="w-32 h-32 object-cover rounded-lg border border-border"
-            />
+                fill
+                unoptimized
+                sizes="128px"
+                className="rounded-lg border border-border object-cover"
+              />
+            </div>
           )}
           <button
+            type="button"
             onClick={() => {
               inputRef.current!.click();
             }}
@@ -114,7 +120,7 @@ export function ImageUploader({ value, onChange, accept = "image/*", maxSizeMB =
           >
             <RefreshCw className="w-4 h-4" /> Replace image
           </button>
-          <button onClick={removeImage} className="text-sm text-destructive hover:text-destructive/80">
+          <button type="button" onClick={removeImage} className="text-sm text-destructive hover:text-destructive/80">
             <Trash2 className="w-4 h-4 inline" /> Remove
           </button>
         </div>
@@ -127,6 +133,7 @@ export function ImageUploader({ value, onChange, accept = "image/*", maxSizeMB =
           <p className="text-sm text-muted-foreground">Drag & drop an image or click to upload</p>
           <p className="text-xs text-muted-foreground">Max {maxSizeMB} MB · {accept}</p>
           <button
+            type="button"
             onClick={() => inputRef.current!.click()}
             className="mt-3 text-xs font-medium text-brand-blue hover:text-brand-blue-dark underline"
           >

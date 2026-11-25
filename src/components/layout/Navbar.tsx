@@ -13,7 +13,6 @@ const NAV_LINKS = [
   { key: "home",      href: "/"          },
   { key: "services",  href: "/services"  },
   { key: "equipment", href: "/equipment" },
-  { key: "catalog",   href: "/catalog"   },
   { key: "about",     href: "/about"     },
   { key: "qualityHse",href: "/quality-hse" },
   { key: "projects",  href: "/projects-experience" },
@@ -179,7 +178,7 @@ export default function Navbar({ locale }: { locale: string }) {
             {/* Quote CTA — desktop */}
             <Link
               href="/contact"
-              className="hidden md:inline-flex items-center gap-1.5 ms-1 px-4 py-2 rounded-xl bg-[var(--brand-blue)] text-white text-sm font-semibold hover:bg-[var(--brand-blue-dark)] active:scale-95 transition-all duration-150 shadow-sm"
+              className="hidden md:inline-flex items-center gap-1.5 ms-1 px-4 py-2 rounded-xl bg-[var(--brand-blue)] text-white text-sm font-semibold whitespace-nowrap shrink-0 leading-none hover:bg-[var(--brand-blue-dark)] active:scale-95 transition-all duration-150 shadow-sm"
             >
               {t("requestQuote")}
               <ChevronRight size={14} className={cn(isRtl && "rotate-180")} />

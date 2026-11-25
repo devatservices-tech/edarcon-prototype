@@ -283,7 +283,7 @@
 
   /* Sidebar */
   .admin-sidebar {
-    @apply hidden lg:flex lg:flex-col lg:w-64 border-r border-border bg-card flex-0;
+    @apply hidden lg:flex lg:flex-col border-r border-border bg-card flex-0;
   }
   .admin-sidebar-collapsed {
     @apply lg:w-20;

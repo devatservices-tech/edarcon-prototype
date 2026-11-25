@@ -12,17 +12,6 @@ import CTASection from "@/components/home/CTASection";
 import { FeaturedEquipment } from "@/components/catalog/FeaturedEquipment";
 import { PRODUCTS } from "@/data/catalog";
 
-type TFunc = (key: string) => unknown;
-
-function tStr(
-  t: (key: string) => unknown,
-  path: string,
-  fallback: string
-): string {
-  const val = t(path);
-  return typeof val === "string" ? val : fallback;
-}
-
 export async function generateMetadata({
   params,
 }: {
@@ -45,13 +34,12 @@ export default async function HomePage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const tc = await getTranslations({ locale, namespace: "catalog" });
   const isRtl = locale === "ar";
-  const t = await getTranslations({ locale, namespace: "catalog" });
-
-  const enrichedProducts = PRODUCTS.map((p) => ({
-    ...p,
-    name: tStr(t as TFunc, `products.${p.id}.name`, p.id),
-    shortDescription: tStr(t as TFunc, `products.${p.id}.shortDescription`, ""),
+  const featuredProducts = PRODUCTS.map((product) => ({
+    ...product,
+    name: tc.raw(`products.${product.id}.name`) as string || product.id,
+    shortDescription: tc.raw(`products.${product.id}.shortDescription`) as string || "",
   }));
 
   return (
@@ -60,18 +48,18 @@ export default async function HomePage({
       <StatsSection locale={locale} />
       <VendorMarquee locale={locale} />
       <ServicesSection locale={locale} />
+      <FeaturedEquipment
+        products={featuredProducts}
+        isRtl={isRtl}
+        title={isRtl ? "فهرس المعدات" : "Equipment Catalogue"}
+        subtitle={isRtl ? "استكشف معداتنا المتاحة للتأجير والتوريد" : "Explore our equipment available for hire and supply"}
+        viewAllLabel={isRtl ? "عرض جميع المعدات" : "View All Equipment"}
+      />
       <AboutSection locale={locale} />
       <ProcessSection />
       <SectorsSection locale={locale} />
       <FAQSection locale={locale} />
       <CTASection locale={locale} />
-      <FeaturedEquipment
-        products={enrichedProducts}
-        isRtl={isRtl}
-        title={tStr(t as TFunc, "title", "Equipment Catalog")}
-        subtitle={tStr(t as TFunc, "intro", "Browse our fleet of equipment.") || "Browse our fleet of equipment."}
-        viewAllLabel={tStr(t as TFunc, "viewAll", "View Full Catalog")}
-      />
     </>
   );
 }

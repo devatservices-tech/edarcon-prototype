@@ -1017,7 +1017,142 @@ export const SEED_SITE_SETTINGS: SiteSettings = {
   },
 };
 
-export const SEED_RFQS: RFQ[] = [];
+export const SEED_RFQS: RFQ[] = [
+  {
+    id: id(),
+    createdAt: ts(1),
+    updatedAt: ts(1),
+    referenceNo: "RFQ-2026-1041",
+    name: "Ahmed Al-Harbi",
+    email: "ahmed.harbi@example.com",
+    phone: "+966 50 000 1041",
+    company: "Eastern Process Services",
+    service: "Flange Facing & Machining",
+    source: "contact",
+    language: "en",
+    message: {
+      en: "Please provide a quotation for on-site flange machining support at our Dammam facility.",
+      ar: "",
+    },
+    status: "new",
+    timeline: [
+      {
+        id: id(),
+        status: "new",
+        changedBy: "Website",
+        changedAt: ts(1),
+        note: "Submitted through the website contact form",
+      },
+    ],
+    notes: [],
+  },
+  {
+    id: id(),
+    createdAt: ts(2),
+    updatedAt: ts(1),
+    referenceNo: "RFQ-2026-1042",
+    name: "Mariam Al-Qahtani",
+    email: "mariam.qahtani@example.com",
+    phone: "+966 55 000 1042",
+    company: "Gulf Industrial Works",
+    service: "Equipment Rental",
+    source: "catalog",
+    language: "ar",
+    message: {
+      en: "",
+      ar: "نرغب في استئجار رافعة متنقلة لمدة ثلاثة أشهر. يرجى إرسال عرض السعر والتوافر.",
+    },
+    status: "contacted",
+    assignedTo: "sales@edarcon.com",
+    timeline: [
+      {
+        id: id(),
+        status: "new",
+        changedBy: "Website",
+        changedAt: ts(2),
+        note: "Submitted through the equipment catalog",
+      },
+      {
+        id: id(),
+        status: "contacted",
+        changedBy: "Sales User",
+        changedAt: ts(1),
+        note: "Initial follow-up completed",
+      },
+    ],
+    notes: [],
+  },
+  {
+    id: id(),
+    createdAt: ts(4),
+    updatedAt: ts(3),
+    referenceNo: "RFQ-2026-1043",
+    name: "Omar Nasser",
+    email: "omar.nasser@example.com",
+    phone: "+966 54 000 1043",
+    company: "Ras Tanura Maintenance Co.",
+    service: "Heat Exchanger Retubing",
+    source: "contact",
+    language: "en",
+    message: {
+      en: "We are planning a shutdown and need a budgetary estimate for heat exchanger retubing.",
+      ar: "",
+    },
+    status: "quoted",
+    assignedTo: "sales@edarcon.com",
+    timeline: [
+      {
+        id: id(),
+        status: "new",
+        changedBy: "Website",
+        changedAt: ts(4),
+        note: "Submitted through the website contact form",
+      },
+      {
+        id: id(),
+        status: "contacted",
+        changedBy: "Sales User",
+        changedAt: ts(3),
+      },
+      {
+        id: id(),
+        status: "quoted",
+        changedBy: "Sales User",
+        changedAt: ts(2),
+        note: "Budgetary quotation sent",
+      },
+    ],
+    notes: [],
+  },
+  {
+    id: id(),
+    createdAt: ts(6),
+    updatedAt: ts(6),
+    referenceNo: "RFQ-2026-1044",
+    name: "Sara Mahmoud",
+    email: "sara.mahmoud@example.com",
+    phone: "+966 56 000 1044",
+    company: "Jubail Mechanical Contractors",
+    service: "Piping Fabrication",
+    source: "chatbot",
+    language: "en",
+    message: {
+      en: "Can your team support piping spool fabrication and pressure testing for a project in Jubail?",
+      ar: "",
+    },
+    status: "new",
+    timeline: [
+      {
+        id: id(),
+        status: "new",
+        changedBy: "Website",
+        changedAt: ts(6),
+        note: "Submitted through the website chatbot",
+      },
+    ],
+    notes: [],
+  },
+];
 
 const MIGRATION_FLAG = "edarcon_rfq_migrated";
 const LEADS_KEY = "edarcon_leads";
@@ -1092,7 +1227,7 @@ export const seedData: Record<string, CollectionModel[]> = {
   documents: SEED_DOCUMENTS,
   "contact-details": [SEED_CONTACT_DETAILS],
   "site-settings": [SEED_SITE_SETTINGS],
-  rfqs: [],
+  rfqs: SEED_RFQS,
   users: [],
   activities: [],
 };

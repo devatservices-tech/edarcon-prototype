@@ -106,117 +106,122 @@ export function CatalogFilters({
       <div className="hidden lg:block">
         <div
           className={cn(
-            "sticky top-0 z-40 flex items-center gap-4 px-6 py-3 bg-background/90 backdrop-blur-md border-b border-border",
+            "sticky top-0 z-40 px-6 py-3 bg-background/90 backdrop-blur-md border-b border-border",
             isRtl ? "rtl" : "ltr"
           )}
         >
-          <div className="flex-1 min-w-0">
-            <div className="relative">
-              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground rtl:left-auto rtl:right-2.5" aria-hidden="true" />
-              <Input
-                type="search"
-                placeholder={t("search")}
-                value={currentSearch}
-                onChange={(e) => {
-                  const params = new URLSearchParams(searchParams.toString());
-                  const val = e.target.value;
-                  if (val === "") params.delete("search");
-                  else params.set("search", val);
-                  params.set("page", "1");
-                  router.push(`${pathname}?${params.toString()}`, { scroll: false });
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") e.preventDefault();
-                }}
-                className="pl-10 pr-4 rtl:pl-4 rtl:pr-10"
-                aria-label={t("searchLabel")}
-              />
+          <div className="flex flex-col lg:flex-row gap-4">
+            <div className="flex-1 min-w-0 flex flex-col gap-3">
+              <div className="relative">
+                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground rtl:left-auto rtl:right-2.5" aria-hidden="true" />
+                <Input
+                  type="search"
+                  placeholder={t("search")}
+                  value={currentSearch}
+                  onChange={(e) => {
+                    const params = new URLSearchParams(searchParams.toString());
+                    const val = e.target.value;
+                    if (val === "") params.delete("search");
+                    else params.set("search", val);
+                    params.set("page", "1");
+                    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") e.preventDefault();
+                  }}
+                  className="pl-10 pr-4 rtl:pl-4 rtl:pr-10"
+                  aria-label={t("searchLabel")}
+                />
+              </div>
+              <div className="flex items-center gap-3 overflow-x-auto scrollbar-hidden pb-1">
+                <Button
+                  onClick={() => setParam("category", "all")}
+                  variant={currentCategory === "all" ? "default" : "outline"}
+                  size="sm"
+                  className="whitespace-nowrap px-3"
+                >
+                  {t("allCategories")}
+                </Button>
+                {CATEGORIES.map((cat) => {
+                  const isActive = currentCategory === cat.id;
+                  return (
+                    <Button
+                      key={cat.id}
+                      onClick={() => setParam("category", cat.id)}
+                      variant={isActive ? "default" : "outline"}
+                      size="sm"
+                      className="whitespace-nowrap px-3"
+                    >
+                      {categoryLabels[cat.id] || cat.id}
+                    </Button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="flex-1 min-w-0 flex flex-col gap-3 lg:flex-1 lg:flex-row lg:items-center lg:gap-3">
+              <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-3">
+                <div className="flex items-center gap-3 overflow-x-auto scrollbar-hidden pb-1">
+                  {AVAILABILITY_OPTIONS.map((opt) => {
+                    const isActive = currentAvailability === opt.value;
+                    return (
+                      <Button
+                        key={opt.value}
+                        onClick={() => setParam("availability", opt.value as string)}
+                        variant={isActive ? "default" : "outline"}
+                        size="sm"
+                        className="whitespace-nowrap px-3"
+                      >
+                        {t(opt.labelKey)}
+                      </Button>
+                    );
+                  })}
+                  <Button
+                    onClick={toggleOperator}
+                    variant={currentOperator ? "default" : "outline"}
+                    size="sm"
+                    className="relative whitespace-nowrap px-3 py-2"
+                    aria-pressed={currentOperator}
+                  >
+                    {currentOperator ? <X size={12} className="mr-1" aria-hidden="true" /> : null}
+                    {t("withOperator")}
+                    {currentOperator && (
+                      <span className="absolute top-1 right-1 size-2 rounded-full bg-[var(--brand-orange)]" aria-hidden="true" />
+                    )}
+                  </Button>
+                </div>
+                <div className="flex items-end gap-3 overflow-x-auto scrollbar-hidden pb-1">
+                  <Select
+                    value={currentSort}
+                    onValueChange={(value) => setParam("sort", value as string)}
+                  >
+                    <SelectTrigger className="w-[150px]">
+                      <SelectValue placeholder={t("sortFeatured")} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {SORT_OPTIONS.map((opt) => (
+                        <SelectItem key={opt.value} value={opt.value}>
+                          {t(opt.labelKey)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Button
+                    onClick={() => {
+                      router.push(pathname, { scroll: false });
+                    }}
+                    variant="outline"
+                    size="sm"
+                    disabled={activeFilterCount === 0}
+                    className="ml-2 hidden md:block"
+                  >
+                    <X size={14} className="mr-1" aria-hidden="true" />
+                    {t("clearFilters")}
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div className="flex-1 min-w-0 flex items-center gap-3 overflow-x-auto scrollbar-hidden pb-1">
-            <Button
-              onClick={() => setParam("category", "all")}
-              variant={currentCategory === "all" ? "default" : "outline"}
-              size="sm"
-              className="whitespace-nowrap px-3"
-            >
-              {t("allCategories")}
-            </Button>
-            {CATEGORIES.map((cat) => {
-              const isActive = currentCategory === cat.id;
-              return (
-                <Button
-                  key={cat.id}
-                  onClick={() => setParam("category", cat.id)}
-                  variant={isActive ? "default" : "outline"}
-                  size="sm"
-                  className="whitespace-nowrap px-3"
-                >
-                  {categoryLabels[cat.id] || cat.id}
-                </Button>
-              );
-            })}
-          </div>
-
-          <div className="flex-1 min-w-0 flex items-center gap-3 overflow-x-auto scrollbar-hidden pb-1">
-            {AVAILABILITY_OPTIONS.map((opt) => {
-              const isActive = currentAvailability === opt.value;
-              return (
-                <Button
-                  key={opt.value}
-                  onClick={() => setParam("availability", opt.value as string)}
-                  variant={isActive ? "default" : "outline"}
-                  size="sm"
-                  className="whitespace-nowrap px-3"
-                >
-                  {t(opt.labelKey)}
-                </Button>
-              );
-            })}
-            <Button
-              onClick={toggleOperator}
-              variant={currentOperator ? "default" : "outline"}
-              size="sm"
-              className="relative whitespace-nowrap px-3 py-2"
-              aria-pressed={currentOperator}
-            >
-              {currentOperator ? <X size={12} className="mr-1" aria-hidden="true" /> : null}
-              {t("withOperator")}
-              {currentOperator && (
-                <span className="absolute top-1 right-1 size-2 rounded-full bg-[var(--brand-orange)]" aria-hidden="true" />
-              )}
-            </Button>
-          </div>
-
-          <Select
-            value={currentSort}
-            onValueChange={(value) => setParam("sort", value as string)}
-          >
-            <SelectTrigger className="w-[150px]">
-              <SelectValue placeholder={t("sortFeatured")} />
-            </SelectTrigger>
-            <SelectContent>
-              {SORT_OPTIONS.map((opt) => (
-                <SelectItem key={opt.value} value={opt.value}>
-                  {t(opt.labelKey)}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          <Button
-            onClick={() => {
-              router.push(pathname, { scroll: false });
-            }}
-            variant="outline"
-            size="sm"
-            disabled={activeFilterCount === 0}
-            className="ml-2 hidden md:block"
-          >
-            <X size={14} className="mr-1" aria-hidden="true" />
-            {t("clearFilters")}
-          </Button>
         </div>
       </div>
 

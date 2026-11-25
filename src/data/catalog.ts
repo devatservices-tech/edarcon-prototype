@@ -25,6 +25,8 @@ export interface CatalogProduct {
   availability: Availability;
   operatorOption: boolean;
   specs: CatalogSpec[];
+  features: string[];
+  applications: string[];
 }
 
 export interface CatalogCategory {
@@ -57,6 +59,17 @@ export const PRODUCTS: CatalogProduct[] = [
       { key: "drive", value: "All-terrain, road-legal" },
       { key: "operator", value: "Certified rigger-operator included" },
     ],
+    features: [
+      "Certified operator and banksman supplied",
+      "Full rigging set: slings, shackles, spreader bar",
+      "Current third-party load test certificate",
+      "Suited to confined and uneven terrain",
+    ],
+    applications: [
+      "Plant lifts and machinery positioning",
+      "Structural steel placement",
+      "Heavy equipment installation",
+    ],
   },
   {
     id: "crawler-crane-100t",
@@ -72,6 +85,17 @@ export const PRODUCTS: CatalogProduct[] = [
       { key: "boomType", value: "Lattice" },
       { key: "drive", value: "Tracked" },
       { key: "groundPressure", value: "Low ground pressure" },
+    ],
+    features: [
+      "100 tonne lift capacity",
+      "Lattice boom for long reach",
+      "Low ground pressure tracks",
+      "Certified operator included",
+    ],
+    applications: [
+      "Heavy structural lifts",
+      "Bridge and infrastructure construction",
+      "Wind turbine component handling",
     ],
   },
   {
@@ -89,6 +113,17 @@ export const PRODUCTS: CatalogProduct[] = [
       { key: "terrain", value: "Rough terrain" },
       { key: "tyres", value: "Heavy-duty" },
     ],
+    features: [
+      "5 tonne lift capacity",
+      "Diesel powered",
+      "Rough terrain capable",
+      "Heavy-duty tyres",
+    ],
+    applications: [
+      "Material handling on site",
+      "Pallet loading and unloading",
+      "Warehouse and yard transport",
+    ],
   },
   {
     id: "excavator-20t",
@@ -105,6 +140,17 @@ export const PRODUCTS: CatalogProduct[] = [
       { key: "drive", value: "Tracked" },
       { key: "attachments", value: "Hydraulic ready" },
     ],
+    features: [
+      "20 tonne operating weight",
+      "Long reach arm",
+      "Hydraulic ready attachments",
+      "Certified operator included",
+    ],
+    applications: [
+      "Earthmoving and excavation",
+      "Trenching and foundation work",
+      "Site preparation and grading",
+    ],
   },
   {
     id: "wheel-loader-3m3",
@@ -120,6 +166,16 @@ export const PRODUCTS: CatalogProduct[] = [
       { key: "drive", value: "4WD" },
       { key: "type", value: "Wheel loader" },
     ],
+    features: [
+      "3 m³ bucket capacity",
+      "4WD drive",
+      "Certified operator included",
+    ],
+    applications: [
+      "Bulk material loading",
+      "Site clearing and levelling",
+      "Aggregate handling",
+    ],
   },
   {
     id: "backhoe-loader",
@@ -134,6 +190,17 @@ export const PRODUCTS: CatalogProduct[] = [
       { key: "drive", value: "4WD" },
       { key: "dipper", value: "Extendable" },
       { key: "functions", value: "Loader + backhoe" },
+    ],
+    features: [
+      "4WD drive",
+      "Extendable dipper",
+      "Loader and backhoe in one",
+      "Certified operator included",
+    ],
+    applications: [
+      "Trenching and excavation",
+      "Material loading",
+      "Utility and drainage work",
     ],
   },
   {
@@ -151,6 +218,17 @@ export const PRODUCTS: CatalogProduct[] = [
       { key: "canopy", value: "Soundproofed" },
       { key: "start", value: "Auto-start" },
     ],
+    features: [
+      "100 kVA power rating",
+      "Diesel powered",
+      "Soundproofed canopy",
+      "Auto-start function",
+    ],
+    applications: [
+      "Site power supply",
+      "Backup power for plant",
+      "Event and temporary power",
+    ],
   },
   {
     id: "light-tower-led",
@@ -166,6 +244,17 @@ export const PRODUCTS: CatalogProduct[] = [
       { key: "chassis", value: "Mobile trailer" },
       { key: "operation", value: "Dusk-to-dawn" },
       { key: "runtime", value: "Extended runtime" },
+    ],
+    features: [
+      "LED lighting",
+      "Mobile trailer chassis",
+      "Dusk-to-dawn operation",
+      "Extended runtime",
+    ],
+    applications: [
+      "Night-time site illumination",
+      "Roadwork and highway lighting",
+      "Security and safety lighting",
     ],
   },
   {
@@ -183,6 +272,17 @@ export const PRODUCTS: CatalogProduct[] = [
       { key: "chassis", value: "Towable" },
       { key: "pressure", value: "Working pressure rated" },
     ],
+    features: [
+      "185 CFM free air delivery",
+      "Diesel driven",
+      "Towable chassis",
+      "Working pressure rated",
+    ],
+    applications: [
+      "Pneumatic tool operation",
+      "Site air supply",
+      "Construction and maintenance",
+    ],
   },
   {
     id: "well-point-system",
@@ -198,6 +298,17 @@ export const PRODUCTS: CatalogProduct[] = [
       { key: "capacity", value: "Site-rated" },
       { key: "pumps", value: "Included" },
       { key: "discharge", value: "Discharge management" },
+    ],
+    features: [
+      "Well-point dewatering system",
+      "Site-rated capacity",
+      "Pumps included",
+      "Discharge management",
+    ],
+    applications: [
+      "Excavation dewatering",
+      "Foundation work water control",
+      "Trench dewatering",
     ],
   },
   {
@@ -215,6 +326,17 @@ export const PRODUCTS: CatalogProduct[] = [
       { key: "impeller", value: "Solids handling" },
       { key: "mounting", value: "Portable" },
     ],
+    features: [
+      "Submersible trash pump",
+      "Dirty water / slurry rated",
+      "Solids handling impeller",
+      "Portable mounting",
+    ],
+    applications: [
+      "Dirty water removal",
+      "Slurry transfer",
+      "Flood and drainage pumping",
+    ],
   },
   {
     id: "tube-fitting-scaffold",
@@ -230,6 +352,17 @@ export const PRODUCTS: CatalogProduct[] = [
       { key: "compliance", value: "TG20" },
       { key: "erectors", value: "Certified riggers" },
       { key: "inspection", value: "Tagging and inspection" },
+    ],
+    features: [
+      "Tube-and-fitting scaffold system",
+      "TG20 compliant",
+      "Certified rigger erectors",
+      "Tagging and inspection included",
+    ],
+    applications: [
+      "Building access and façade work",
+      "Maintenance and inspection access",
+      "Temporary site access structures",
     ],
   },
   {
@@ -247,6 +380,17 @@ export const PRODUCTS: CatalogProduct[] = [
       { key: "tyres", value: "Non-marking" },
       { key: "emission", value: "Zero emission" },
     ],
+    features: [
+      "12 m working height",
+      "Electric drive",
+      "Non-marking tyres",
+      "Zero emission",
+    ],
+    applications: [
+      "Indoor and outdoor access",
+      "Ceiling and high-level work",
+      "Warehouse and facility maintenance",
+    ],
   },
   {
     id: "pickup-4x4",
@@ -262,6 +406,16 @@ export const PRODUCTS: CatalogProduct[] = [
       { key: "model", value: "Hilux / equivalent" },
       { key: "type", value: "Pickup" },
       { key: "driver", value: "Driver included" },
+    ],
+    features: [
+      "4×4 drive",
+      "Hilux or equivalent model",
+      "Driver included",
+    ],
+    applications: [
+      "Site personnel transport",
+      "Light equipment transport",
+      "Site supervision and inspection",
     ],
   },
   {
@@ -279,6 +433,16 @@ export const PRODUCTS: CatalogProduct[] = [
       { key: "type", value: "Crew bus" },
       { key: "driver", value: "Driver included" },
     ],
+    features: [
+      "30 seats",
+      "Air conditioning",
+      "Driver included",
+    ],
+    applications: [
+      "Crew transportation to site",
+      "Shift change transport",
+      "Off-site accommodation transfer",
+    ],
   },
   {
     id: "site-cabin-portacabin",
@@ -294,6 +458,17 @@ export const PRODUCTS: CatalogProduct[] = [
       { key: "use", value: "Site office / welfare" },
       { key: "insulation", value: "Insulated panels" },
       { key: "deployment", value: "Rapid deployment" },
+    ],
+    features: [
+      "Portacabin structure",
+      "Site office / welfare use",
+      "Insulated panels",
+      "Rapid deployment",
+    ],
+    applications: [
+      "Site office and welfare",
+      "Temporary site accommodation",
+      "Project management office",
     ],
   },
 ] as const;

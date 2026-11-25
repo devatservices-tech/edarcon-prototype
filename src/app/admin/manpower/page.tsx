@@ -1,33 +1,28 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
-import { useForm } from "react-hook-form";
+import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCollection } from "@/hooks/useCollection";
-import { manpowerCategoriesRepo } from "@/lib/admin/store";
 import type { ManpowerCategory } from "@/lib/admin/types";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { PageHeader } from "@/components/admin/PageHeader";
 import { ConfirmDialog } from "@/components/admin/ConfirmDialog";
 import { ADMIN_SIDEBAR_ITEMS } from "@/components/admin/nav";
-import { DataTable } from "@/components/admin/DataTable";
 import { EmptyState } from "@/components/admin/EmptyState";
-import { BilingualField } from "@/components/admin/BilingualField";
-import { SlugInput } from "@/components/admin/SlugInput";
-import { IconPicker } from "@/components/admin/IconPicker";
+import { generateUniqueSlug } from "@/lib/admin/slug";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Edit, Trash2, MinusCircle, PlusCircle, Users as UsersIcon } from "lucide-react";
+import { Plus, Edit, Trash2, MinusCircle, PlusCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const categorySchema = z.object({
   nameEn: z.string().min(1, "English name is required"),
   nameAr: z.string().min(1, "Arabic name is required"),
-  slug: z.string().min(1, "Slug is required"),
   descEn: z.string().min(1, "English description is required"),
   descAr: z.string().min(1, "Arabic description is required"),
   totalHeadcount: z.coerce.number().min(0),
@@ -42,9 +37,9 @@ type ManpowerFormData = z.infer<typeof categorySchema>;
 
 function toFormData(c: ManpowerCategory | null): ManpowerFormData {
   if (!c) {
-    return { nameEn: "", nameAr: "", slug: "", descEn: "", descAr: "", totalHeadcount: 0, availableHeadcount: 0, certifications: "", experienceLevel: "intermediate", active: true, status: "draft" };
+    return { nameEn: "", nameAr: "", descEn: "", descAr: "", totalHeadcount: 0, availableHeadcount: 0, certifications: "", experienceLevel: "intermediate", active: true, status: "draft" };
   }
-  return { nameEn: c.name.en, nameAr: c.name.ar, slug: c.slug, descEn: c.description.en, descAr: c.description.ar, totalHeadcount: c.totalHeadcount, availableHeadcount: c.availableHeadcount, certifications: c.certifications.join(", "), experienceLevel: c.experienceLevel, active: c.active, status: c.status };
+  return { nameEn: c.name.en, nameAr: c.name.ar, descEn: c.description.en, descAr: c.description.ar, totalHeadcount: c.totalHeadcount, availableHeadcount: c.availableHeadcount, certifications: c.certifications.join(", "), experienceLevel: c.experienceLevel, active: c.active, status: c.status };
 }
 
 const EXPERIENCE_LEVELS = [
@@ -68,7 +63,7 @@ export default function ManpowerPage() {
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
   const form = useForm<ManpowerFormData>({
-    resolver: zodResolver(categorySchema) as any,
+    resolver: zodResolver(categorySchema) as Resolver<ManpowerFormData>,
     defaultValues: toFormData(null),
   });
 
@@ -90,7 +85,11 @@ export default function ManpowerPage() {
         certifications: string[];
       } = {
         name: { en: data.nameEn, ar: data.nameAr },
-        slug: data.slug,
+        slug: generateUniqueSlug(
+          data.nameEn,
+          list.map((category) => category.slug),
+          editing?.slug,
+        ),
         description: { en: data.descEn, ar: data.descAr },
         totalHeadcount: data.totalHeadcount,
         availableHeadcount: Math.min(data.availableHeadcount, data.totalHeadcount),
@@ -236,7 +235,6 @@ export default function ManpowerPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2"><label className="text-xs font-medium text-muted-foreground uppercase">Name (EN)</label><Input {...form.register("nameEn")} placeholder="Category name" /></div>
               <div className="space-y-2"><label className="text-xs font-medium text-muted-foreground uppercase">Name (AR)</label><Input {...form.register("nameAr")} placeholder="الفئة" dir="rtl" /></div>
-              <div className="md:col-span-2 space-y-2"><label className="text-xs font-medium text-muted-foreground uppercase">Slug</label><SlugInput value={form.getValues().slug} onChange={(v) => form.setValue("slug", v)} sourceName={form.getValues().nameEn} /></div>
               <div className="md:col-span-2 space-y-2"><label className="text-xs font-medium text-muted-foreground uppercase">Description (EN)</label><Textarea {...form.register("descEn")} rows={2} placeholder="Description" /></div>
               <div className="md:col-span-2 space-y-2"><label className="text-xs font-medium text-muted-foreground uppercase">Description (AR)</label><Textarea {...form.register("descAr")} rows={2} dir="rtl" placeholder="الوصف" /></div>
             </div>

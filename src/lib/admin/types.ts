@@ -21,10 +21,13 @@ export interface BaseRecord {
 
 export interface Service extends BaseRecord {
   name: Translatable;
+  title?: Translatable;
+  subtitle?: Translatable;
   slug: string;
   shortDescription: Translatable;
   description: Translatable;
   category: string;
+  categoryLocalized?: Translatable;
   icon: string;
   highlights: Translatable[];
   image?: string;
